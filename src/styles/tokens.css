@@ -1,0 +1,48 @@
+:root {
+  --canvas: #f8f8f4;
+  --surface: #ffffff;
+  --surface-muted: #f0f1eb;
+  --ink: #20231f;
+  --ink-muted: #686d65;
+  --line: rgba(32, 35, 31, 0.12);
+  --accent: #657553;
+  --accent-strong: #4e6040;
+  --blue-soft: #dce7ec;
+  --error: #9f3f38;
+
+  --radius-control: 8px;
+  --radius-media: 12px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 600ms;
+
+  --page-max: 720px;
+  --prose-max: 480px;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-blue-soft: var(--blue-soft);
+  --color-error: var(--error);
+  --font-sans: var(--font-pretendard), "Pretendard Variable", sans-serif;
+  --radius-control: 8px;
+  --radius-media: 12px;
+}

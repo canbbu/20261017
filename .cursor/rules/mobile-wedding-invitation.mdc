@@ -1,0 +1,31 @@
+---
+description: Rules for implementing the mobile wedding invitation
+alwaysApply: true
+---
+
+# Required context
+
+Before editing UI code, read these files completely:
+
+- `CURSOR_MASTER_PROMPT.md`
+- `docs/IMPLEMENTATION_SPEC.md`
+- `docs/DESIGN_SYSTEM.md`
+- `docs/QA_CHECKLIST.md`
+- `src/content/wedding.ts`
+
+# Non-negotiable rules
+
+1. The hero contains only the real photo and semantic HTML text.
+2. Preserve the supplied wedding photo's color and aspect ratio. Do not crop either person at 360, 390, or 430px widths.
+3. All personal data and visible copy come from `src/content/wedding.ts`.
+4. Keep design dials at variance 5, motion 4, density 3.
+5. Use one light theme and one olive accent. No gold, purple AI gradients, glassmorphism, floral SVGs, decorative badges, or heavy shadows.
+6. Use Motion for simple reveals. Use GSAP only for a justified scroll sequence. No direct scroll event listeners.
+7. Honor reduced motion and WCAG AA.
+8. Client Components must be small interactive leaves. Keep page and static sections as Server Components.
+9. Do not fabricate user names, phone numbers, accounts, addresses, RSVP success, or map data.
+10. Do not declare completion until every mandatory item in `docs/QA_CHECKLIST.md` is checked or documented as a known failure in `docs/QA_REPORT.md`.
+
+# Required workflow
+
+Before code, output a concise `<design_plan>` with component boundaries, dependencies, motion purpose, image cropping strategy, and test plan. After code, run lint, typecheck, tests, build, Playwright, and mobile screenshot checks. Report exact results.

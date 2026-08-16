@@ -14,34 +14,31 @@ export function ContactActions({
   const sms = phone ? toSmsHref(phone) : null;
 
   return (
-    <div className="flex flex-col gap-3 text-center">
+    <div className="flex flex-col items-center gap-3 text-center">
+      {tel ? (
+        <a href={tel} className="icon-circle" aria-label={`${name}에게 전화하기`}>
+          <Phone size={22} weight="regular" aria-hidden="true" />
+        </a>
+      ) : (
+        <span className="icon-circle" aria-hidden="true">
+          <Phone size={22} weight="regular" />
+        </span>
+      )}
       <div>
         <p className="font-serif text-[1rem]">{name}</p>
-        {phone && tel ? (
-          <p className="caption text-ink-muted">{formatPhone(phone)}</p>
-        ) : null}
+        {phone && tel ? <p className="caption mt-1 text-ink-muted">{formatPhone(phone)}</p> : null}
       </div>
-      {tel && sms ? (
-        <div className="grid grid-cols-2 gap-1.5">
-          <a
-            href={tel}
-            className="control inline-flex items-center justify-center gap-1 border border-line bg-surface text-[0.8125rem]"
-            aria-label={`${name}에게 전화하기`}
-          >
-            <Phone size={18} weight="regular" aria-hidden="true" />
-            전화
-          </a>
-          <a
-            href={sms}
-            className="control inline-flex items-center justify-center gap-1 border border-line bg-surface text-[0.8125rem]"
-            aria-label={`${name}에게 문자 보내기`}
-          >
-            <ChatCircle size={18} weight="regular" aria-hidden="true" />
-            문자
-          </a>
-        </div>
+      {sms ? (
+        <a
+          href={sms}
+          className="quiet-button w-full"
+          aria-label={`${name}에게 문자 보내기`}
+        >
+          <ChatCircle size={16} weight="regular" aria-hidden="true" />
+          문자
+        </a>
       ) : (
-        <p className="caption text-ink-muted">연락처는 아직 입력되지 않았습니다.</p>
+        <p className="caption text-ink-muted">연락처는 아직 없습니다.</p>
       )}
     </div>
   );

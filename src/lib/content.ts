@@ -17,5 +17,5 @@ export function hasPhone(value?: string): boolean {
 }
 
 export function coupleNames(): string {
-  return `${wedding.couple.groom.name} ・ ${wedding.couple.bride.name}`;
+  return `${wedding.couple.groom.name} · ${wedding.couple.bride.name}`;
 }

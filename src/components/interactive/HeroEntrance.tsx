@@ -45,7 +45,7 @@ const detail = {
   visible: {
     y: 0,
     opacity: 1,
-    letterSpacing: "0.12em",
+    letterSpacing: "0.18em",
     transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
   },
 };

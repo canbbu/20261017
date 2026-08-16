@@ -4,7 +4,7 @@ import { Reveal } from "@/components/interactive/Reveal";
 
 export function Gallery() {
   return (
-    <section className="section bg-surface-muted" aria-labelledby="gallery-title">
+    <section className="section bg-canvas" aria-labelledby="gallery-title">
       <Reveal className="page-shell mx-auto">
         <h2 id="gallery-title" className="section-title">
           사진

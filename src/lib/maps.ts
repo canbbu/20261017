@@ -1,10 +1,11 @@
 export type MapLink = {
-  id: "naver" | "kakao" | "tmap";
+  id: "google" | "naver" | "kakao" | "tmap";
   label: string;
   href: string;
 };
 
 const LABELS: Record<MapLink["id"], string> = {
+  google: "지도 보기",
   naver: "네이버지도",
   kakao: "카카오맵",
   tmap: "티맵",
@@ -20,11 +21,19 @@ export function isHttpsUrl(value: string): boolean {
 }
 
 export function getSafeMapLinks(links: {
+  google?: string;
   naver: string;
   kakao: string;
   tmap: string;
 }): MapLink[] {
   return (Object.keys(LABELS) as MapLink["id"][])
-    .map((id) => ({ id, label: LABELS[id], href: links[id].trim() }))
+    .map((id) => ({ id, label: LABELS[id], href: (links[id] ?? "").trim() }))
     .filter((link) => isHttpsUrl(link.href));
+}
+
+export function getDirectionsHref(address: string): string | null {
+  if (!address.trim()) {
+    return null;
+  }
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address.trim())}`;
 }

@@ -27,28 +27,29 @@ export type Account = {
 export const wedding = {
   couple: {
     groom: {
-      name: "신랑",
+      name: "이영직",
       phone: "",
       parents: [] as Person["parents"],
     } satisfies Person,
     bride: {
-      name: "신부",
+      name: "김지수",
       phone: "",
       parents: [] as Person["parents"],
     } satisfies Person,
   },
 
   event: {
-    // TODO: 실제 예식 일시를 ISO 8601 형식으로 입력하세요.
-    startsAt: "2026-08-15T13:00:00+09:00",
+    // 시각은 아직 확인되지 않아 기존 기본값 13:00을 유지합니다.
+    startsAt: "2026-10-17T13:00:00+09:00",
     timezone: "Asia/Seoul",
-    venueName: "예식장 이름",
-    hall: "홀과 층",
-    address: "도로명 주소",
-    phone: "",
+    venueName: "셀레네하우스웨딩",
+    hall: "천안점",
+    address: "충남 천안시 동남구 배울1길 35",
+    phone: "041-555-1357",
     mapLinks: {
-      naver: "",
-      kakao: "",
+      google: "https://maps.app.goo.gl/cw1Yimj92K8ENiYC9",
+      naver: "https://map.naver.com/p/search/%EC%B6%A9%EB%82%A8%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EB%B0%B0%EC%9A%B81%EA%B8%B8%2035",
+      kakao: "https://map.kakao.com/link/search/충남 천안시 동남구 배울1길 35",
       tmap: "",
     },
     transportation: {
@@ -62,7 +63,7 @@ export const wedding = {
   copy: {
     heroTitle: "우리, 결혼합니다",
     invitation:
-      "서로를 바라보던 평범한 날들이 모여, 이제 같은 방향으로 걸어가려 합니다. 저희의 새로운 시작을 함께해 주세요.",
+      "서로를 바라보던 평범한 날들이 모여\n이제 같은 방향으로 걸어가려 합니다.\n저희의 새로운 시작을 함께해 주세요.",
   },
 
   hero: {

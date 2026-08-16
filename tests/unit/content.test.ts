@@ -12,9 +12,10 @@ describe("wedding content contract", () => {
     expect(wedding.couple.bride.name).not.toBe("");
   });
 
-  it("does not render map buttons for empty or non-https links", () => {
-    expect(getSafeMapLinks(wedding.event.mapLinks)).toEqual([]);
+  it("keeps only https map links", () => {
+    expect(getSafeMapLinks(wedding.event.mapLinks).some((link) => link.id === "google")).toBe(true);
     expect(getSafeMapLinks({
+      google: "",
       naver: "http://map.naver.com",
       kakao: "https://map.kakao.com/test",
       tmap: "",

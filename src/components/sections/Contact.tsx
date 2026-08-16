@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <section className="section bg-canvas" aria-labelledby="contact-title">
       <Reveal className="page-shell mx-auto">
-        <h2 id="contact-title" className="section-title">
+        <h2 id="contact-title" className="sr-only">
           연락하기
         </h2>
         <div className="contact-card grid grid-cols-2">
@@ -25,7 +25,7 @@ export function Contact() {
           </div>
         </div>
         {parentContacts.length > 0 ? (
-          <div className="mt-8">
+          <div className="mt-6">
             <Accordion title="혼주에게 연락하기">
               <div className="grid gap-6">
                 {parentContacts.map((parent) => (
@@ -38,9 +38,7 @@ export function Contact() {
               </div>
             </Accordion>
           </div>
-        ) : (
-          <p className="caption mt-8 text-ink-muted">혼주 연락처는 아직 입력되지 않았습니다.</p>
-        )}
+        ) : null}
       </Reveal>
     </section>
   );

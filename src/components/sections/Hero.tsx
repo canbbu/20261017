@@ -30,8 +30,8 @@ export function Hero() {
           className="hero-photo"
         />
       </HeroPhotoMotion>
-      <div className="hero-shade pointer-events-none absolute inset-x-0 top-0 h-[42%]" />
-      <div className="absolute inset-x-0 top-0 px-5 pt-[max(34px,env(safe-area-inset-top))] text-center text-canvas">
+      <div className="hero-shade pointer-events-none absolute inset-x-0 top-0 h-[28%]" />
+      <div className="absolute inset-x-0 top-0 px-5 pt-[max(40px,env(safe-area-inset-top))] text-center text-canvas">
         <HeroTextMotion title={wedding.copy.heroTitle} names={coupleNames()} date={dateLine} />
       </div>
     </section>

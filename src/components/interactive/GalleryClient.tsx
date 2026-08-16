@@ -35,7 +35,6 @@ export function GalleryClient({ images }: { images: readonly GalleryImage[] }) {
           {visible.map((image, index) => (
           <motion.li
             key={image.src}
-            className={image.featured ? "gallery-featured" : undefined}
             variants={{
               hidden: { opacity: 0, y: 16, scale: 0.985 },
               visible: { opacity: 1, y: 0, scale: 1 },
@@ -59,9 +58,9 @@ export function GalleryClient({ images }: { images: readonly GalleryImage[] }) {
                 height={image.height}
                 fallbackLabel="갤러리"
                 className="media gallery-image h-full w-full object-cover transition-transform duration-700 ease-out"
-                sizes={image.featured ? "(max-width: 720px) 100vw, 720px" : "(max-width: 720px) 50vw, 360px"}
+                sizes="(max-width: 720px) 33vw, 240px"
                 loading="lazy"
-                style={{ aspectRatio: image.featured ? "16 / 10" : "3 / 4" }}
+                style={{ aspectRatio: "3 / 4" }}
               />
             </button>
           </motion.li>

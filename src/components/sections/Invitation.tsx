@@ -8,7 +8,7 @@ export function Invitation() {
         <h2 id="invitation-title" className="sr-only">
           초대 인사
         </h2>
-        <p className="prose-block mx-auto text-center text-[clamp(1rem,3.8vw,1.125rem)] leading-[1.75] text-ink">
+        <p className="prose-block mx-auto whitespace-pre-line text-center font-serif text-[clamp(1rem,3.8vw,1.125rem)] leading-[2] text-ink">
           {wedding.copy.invitation}
         </p>
       </Reveal>

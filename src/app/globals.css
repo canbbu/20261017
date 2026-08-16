@@ -34,7 +34,7 @@ body {
 }
 
 .section {
-  padding: 80px 20px;
+  padding: 64px 20px;
 }
 
 @media (min-width: 390px) {
@@ -81,7 +81,7 @@ body {
 }
 
 .hero-shade {
-  background: linear-gradient(to bottom, rgb(20 29 18 / 0.28), transparent 48%);
+  background: linear-gradient(to bottom, rgb(20 29 18 / 0.1), transparent);
 }
 
 .font-serif {
@@ -90,11 +90,12 @@ body {
 
 .calendar-card,
 .info-card,
-.contact-card {
+.contact-card,
+.action-card {
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--surface);
-  box-shadow: 0 10px 30px rgb(44 49 40 / 0.035);
+  box-shadow: 0 8px 24px rgb(44 49 40 / 0.04);
 }
 
 .calendar-card {
@@ -128,30 +129,31 @@ body {
 
 .hero-title {
   font-family: "Noto Serif KR", Batang, serif;
-  font-size: clamp(2.05rem, 8.2vw, 4.5rem);
+  font-size: clamp(1.5rem, 6.6vw, 1.85rem);
   font-weight: 400;
-  letter-spacing: 0.11em;
-  line-height: 1.25;
-  text-shadow: 0 1px 14px rgb(16 24 13 / 0.35);
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-shadow: 0 1px 8px rgb(16 24 13 / 0.18);
 }
 
 .hero-names {
-  margin-top: 10px;
+  margin-top: 14px;
   font-family: "Noto Serif KR", Batang, serif;
-  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.12em;
-  text-shadow: 0 1px 12px rgb(16 24 13 / 0.4);
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-shadow: 0 1px 8px rgb(16 24 13 / 0.18);
 }
 
 .hero-date {
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: "Noto Serif KR", Batang, serif;
-  font-size: clamp(0.9rem, 3.6vw, 1.15rem);
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.14em;
-  line-height: 1.2;
-  text-shadow: 0 1px 12px rgb(16 24 13 / 0.4);
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-shadow: 0 1px 8px rgb(16 24 13 / 0.18);
 }
 
 .gallery-grid {
@@ -160,8 +162,27 @@ body {
   gap: 8px;
 }
 
-.gallery-featured {
-  grid-column: span 2;
+.quiet-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+  color: var(--ink);
+  font-size: 0.8125rem;
+}
+
+.icon-circle {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
 }
 
 .gallery-grid button:hover .gallery-image {

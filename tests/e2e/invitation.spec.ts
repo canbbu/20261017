@@ -11,9 +11,19 @@ test.describe("mobile wedding invitation", () => {
     const calendarTitle = page.locator("#calendar-title");
     await calendarTitle.scrollIntoViewIfNeeded();
     await expect(calendarTitle).toBeVisible();
-    await expect(page.getByText("15").first()).toBeVisible();
+    await expect(page.locator("[aria-current='date']")).toHaveText("17");
+    await expect(page.getByRole("heading", { name: "마음을 전하실 곳" })).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "참석 의사" })).toHaveCount(0);
     await expect(page.getByText("접수되었습니다")).toHaveCount(0);
+  });
+
+  test("shows the gift page account row without inventing numbers", async ({ page }) => {
+    await page.goto("/gift");
+    const gift = page.getByRole("heading", { name: "마음을 전하실 곳" });
+    await gift.scrollIntoViewIfNeeded();
+    await expect(gift).toBeVisible();
+    await page.getByRole("button", { name: "마음을 전하실 곳" }).click();
+    await expect(page.getByText("계좌 정보는 아직 입력되지 않았습니다.")).toBeVisible();
   });
 
   test("keeps hero title over the photograph", async ({ page }) => {

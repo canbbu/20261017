@@ -46,8 +46,15 @@ export function formatEventDateLine(iso: string, timeZone: string): string {
 }
 
 export function formatHeroDateLine(iso: string, timeZone: string): string {
-  const { year, month, day, weekday } = getDateParts(iso, timeZone);
-  return `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")} ${weekday}`;
+  const { year, month, day } = getDateParts(iso, timeZone);
+  const weekday = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    weekday: "short",
+  })
+    .format(parseWeddingDate(iso))
+    .toUpperCase();
+
+  return `${year}. ${String(month).padStart(2, "0")}. ${String(day).padStart(2, "0")} ${weekday}`;
 }
 
 export function getWeekdayLabels() {

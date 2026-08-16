@@ -43,7 +43,8 @@
 ## 타이포 스케일
 
 ```text
-Hero title: clamp(2.25rem, 9vw, 4.75rem), 1.12, tracking -0.025em
+Hero title: clamp(1.5rem, 6.6vw, 1.85rem), 1.35, tracking 0.04em
+Hero names/date: 0.875rem, 1.4, tracking 0.18em
 Section title: clamp(1.75rem, 6vw, 2.75rem), 1.2, tracking -0.02em
 Date display: clamp(1.5rem, 5vw, 2.25rem), 1.2, tracking 0.12em
 Body: clamp(1rem, 3.8vw, 1.125rem), 1.75

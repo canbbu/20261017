@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { coupleNames, guestParentLine, heroCoupleNames } from "@/lib/content";
 import { wedding } from "@/content/wedding";
 import { getSafeMapLinks } from "@/lib/maps";
 import { toSmsHref, toTelHref } from "@/lib/phone";
@@ -39,5 +40,15 @@ describe("wedding content contract", () => {
   it("points images at /images/", () => {
     expect(wedding.hero.src.startsWith("/images/")).toBe(true);
     expect(wedding.gallery.every((image) => image.src.startsWith("/images/"))).toBe(true);
+  });
+
+  it("keeps footer names short and hero names labeled", () => {
+    expect(coupleNames()).toBe("이영직 · 김지수");
+    expect(heroCoupleNames()).toBe("신랑 이영직 · 신부 김지수");
+  });
+
+  it("builds guest parent lines from stored names only", () => {
+    expect(guestParentLine(wedding.couple.groom.parents, "아들")).toBe("이준명 · 최란옥의 아들");
+    expect(guestParentLine(wedding.couple.bride.parents, "딸")).toBe("김재동의 딸");
   });
 });

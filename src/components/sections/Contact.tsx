@@ -1,4 +1,5 @@
 import { wedding } from "@/content/wedding";
+import { hasPhone } from "@/lib/content";
 import { Accordion } from "@/components/interactive/Accordion";
 import { ContactActions } from "@/components/interactive/ContactActions";
 import { Reveal } from "@/components/interactive/Reveal";
@@ -8,7 +9,7 @@ export function Contact() {
   const parentContacts = [
     ...groom.parents.map((parent) => ({ ...parent, side: "신랑측" })),
     ...bride.parents.map((parent) => ({ ...parent, side: "신부측" })),
-  ];
+  ].filter((parent) => hasPhone(parent.phone));
 
   return (
     <section className="section bg-canvas" aria-labelledby="contact-title">

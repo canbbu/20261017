@@ -10,13 +10,13 @@ Git commit: 없음. 이 폴더는 아직 git 저장소가 아니다.
 |---|---|
 | `npm run lint` (`next lint`) | 성공. 경고 없음 |
 | `npm run typecheck` | 성공 |
-| `npm run test` (Vitest 16) | 성공 |
-| `npm run build` | 성공. `/` 55.6 kB, First Load JS 159 kB |
-| `npx playwright test` | 성공. 9 / 9 |
+| `npm run test` (Vitest 18) | 성공 |
+| `npm run build` | 성공. `/` 124 B, First Load JS 161 kB |
+| `npx playwright test` | 성공. 10 / 10 |
 
 ## Viewport별 screenshot 경로
 
-사람이 확인한 Hero 크롭 결과: 360, 390, 430에서 두 사람 얼굴과 상체가 보이며, 제목/이름/날짜가 사진 위 잔디 영역에 겹친다. 세로 화면은 `object-fit: cover`로 좌우 잔디만 잘리고, 인물은 중앙에 유지된다.
+사람이 확인한 Hero 크롭 결과: 360, 390, 430에서 두 사람 전신이 보이며, 제목/이름/날짜가 사진 위 잔디 영역에 겹친다. 프레임은 `hero_2.jpg` 원본 비율(1171/1343)이라 좌우를 거의 자르지 않고, 첫 화면 아래에 초대 글이 보인다.
 
 - `docs/screenshots/hero-360x800.png`
 - `docs/screenshots/hero-390x844.png`
@@ -37,7 +37,7 @@ Git commit: 없음. 이 폴더는 아직 git 저장소가 아니다.
 | 모바일 화면, 시뮬 4G | 56 | 13.2s | 0 | TBT 0ms | 랩 스로틀. CDN 배포 전 수치 |
 | INP | 미측정 | | | | navigation 감사에는 상호작용 샘플이 없음 |
 
-Hero는 14MB 원본을 쓰지 않고 1600px / 약 626KB 파생본을 쓴다. 원본 `DSCF0055.jpg`(3000x4000)는 `public/images/DSCF0055_retouch_3000x4000.jpg`와 상위 폴더에 그대로 있다.
+Hero는 `hero_2.jpg`(1171×1343)를 쓴다. 더 긴 3:4 원본 `hero.jpg`와 `DSCF0055_retouch_3000x4000.jpg`는 그대로 두었다.
 
 ## 체크리스트
 

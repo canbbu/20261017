@@ -43,8 +43,8 @@
 ## 타이포 스케일
 
 ```text
-Hero title: clamp(1.5rem, 6.6vw, 1.85rem), 1.35, tracking 0.04em
-Hero names/date: 0.875rem, 1.4, tracking 0.18em
+Hero title: clamp(1.75rem, 7vw, 2.15rem), 1.3, tracking 0.12em, white 94%
+Hero names/date: 0.75rem, 1.4, tracking 0.18–0.2em, white 86%
 Section title: clamp(1.75rem, 6vw, 2.75rem), 1.2, tracking -0.02em
 Date display: clamp(1.5rem, 5vw, 2.25rem), 1.2, tracking 0.12em
 Body: clamp(1rem, 3.8vw, 1.125rem), 1.75
@@ -60,7 +60,7 @@ Caption: 0.875rem, 1.5
 - 본문 텍스트 최대 너비: 480px
 - 모바일 좌우 여백: 20px, 390px 이상에서 24px
 - 주요 섹션 상하 여백: 80-112px
-- Hero: viewport 전체 폭, 최소 높이 100svh
+- Hero: viewport 전체 폭, 사진 원본 비율(1171/1343)의 포스터 프레임. 100svh를 쓰지 않음
 - 정보 섹션은 카드보다 여백과 1px line 사용
 - 데스크톱에서도 모바일 청첩장의 친밀한 폭을 유지하며 과도하게 넓히지 않음
 
@@ -68,7 +68,7 @@ Caption: 0.875rem, 1.5
 
 ### Hero
 
-세로 사진 full bleed. 텍스트는 상단 중앙 또는 사진의 실제 빈 공간에 배치한다. 필요하면 글자 뒤에 text-shadow 하나만 사용한다. 장식 요소는 없다.
+세로 사진 full bleed, 원본 비율 포스터. 상단 40%에 12%에서 투명으로 퍼지는 올리브 음영을 두고, 글자 그림자는 8px / 12%만 쓴다. 제목은 흰색 94%, 이름/날짜는 캡션. 장식 요소는 없다.
 
 ### Invitation
 
@@ -94,7 +94,7 @@ Caption: 0.875rem, 1.5
 
 | 대상 | 목적 | 방식 | 시간 |
 |---|---|---|---|
-| Hero 사진 | 첫 장면의 안정감 | scale 1.03 to 1 | 1600ms |
+| Hero 사진 | 첫 장면의 안정감 | scale 1.02 to 1 | 2400ms |
 | Hero 텍스트 | 정보 순서 | opacity + y 8px | 800ms |
 | 주요 섹션 | 읽기 흐름 | opacity + y 12px | 600ms |
 | Gallery item | 사진 순서 | 60ms stagger | 500ms |

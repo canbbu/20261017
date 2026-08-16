@@ -12,7 +12,7 @@ export function HeroPhotoMotion({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       className="absolute inset-0"
-      initial={{ scale: 1.055 }}
+      initial={{ scale: 1.02 }}
       animate={{ scale: 1 }}
       transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -31,8 +31,8 @@ const container = {
   },
 };
 
-const line = {
-  hidden: { y: "115%", opacity: 0 },
+const titleReveal = {
+  hidden: { y: "110%", opacity: 0 },
   visible: {
     y: "0%",
     opacity: 1,
@@ -41,11 +41,10 @@ const line = {
 };
 
 const detail = {
-  hidden: { y: 12, opacity: 0, letterSpacing: "0.04em" },
+  hidden: { y: 10, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    letterSpacing: "0.18em",
     transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
@@ -60,7 +59,6 @@ export function HeroTextMotion({
   date: string;
 }) {
   const reduce = useReducedMotion();
-  const titleParts = title.split(" ");
 
   if (reduce) {
     return (
@@ -80,14 +78,11 @@ export function HeroTextMotion({
       aria-label={`${title}. ${names}. ${date}`}
     >
       <h1 className="hero-title" aria-hidden="true">
-        {titleParts.map((part, index) => (
-          <span key={`${part}-${index}`} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
-            <motion.span className="inline-block" variants={line}>
-              {part}
-              {index < titleParts.length - 1 ? "\u00a0" : ""}
-            </motion.span>
-          </span>
-        ))}
+        <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+          <motion.span className="inline-block" variants={titleReveal}>
+            {title}
+          </motion.span>
+        </span>
       </h1>
       <motion.p className="hero-names" variants={detail}>
         {names}

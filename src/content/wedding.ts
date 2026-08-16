@@ -29,12 +29,17 @@ export const wedding = {
     groom: {
       name: "이영직",
       phone: "",
-      parents: [] as Person["parents"],
+      parents: [
+        { relation: "부", name: "이준명", phone: "" },
+        { relation: "모", name: "최란옥", phone: "" },
+      ],
     } satisfies Person,
     bride: {
       name: "김지수",
       phone: "",
-      parents: [] as Person["parents"],
+      parents: [
+        { relation: "부", name: "김재동", phone: "" },
+      ],
     } satisfies Person,
   },
 
@@ -67,13 +72,13 @@ export const wedding = {
   },
 
   hero: {
-    // 웹용 파생본. 원본 3000x4000은 originals/DSCF0055_retouch_3000x4000.jpg
-    src: "/images/hero.jpg" as const,
+    // mock과 같은 넓은 잔디 구도. 원본 비율 1171x1343을 프레임에 그대로 씀
+    src: "/images/hero_2.jpg" as const,
     alt: "푸른 잔디밭에 나란히 앉아 서로를 바라보는 신랑과 신부",
-    width: 1086,
-    height: 1448,
+    width: 1171,
+    height: 1343,
     objectPositionMobile: "50% 50%",
-    objectPositionDesktop: "50% 42%",
+    objectPositionDesktop: "50% 50%",
   },
 
   gallery: [

@@ -1,19 +1,26 @@
 import { wedding } from "@/content/wedding";
+import { guestParentLine } from "@/lib/content";
 import { Reveal } from "@/components/interactive/Reveal";
 
-function ParentLine({
+function FamilyColumn({
+  label,
+  name,
   parents,
+  childWord,
 }: {
-  parents: ReadonlyArray<{ relation: string; name: string }>;
+  label: string;
+  name: string;
+  parents: ReadonlyArray<{ name: string }>;
+  childWord: "아들" | "딸";
 }) {
-  if (parents.length === 0) {
-    return null;
-  }
+  const line = guestParentLine(parents, childWord);
 
   return (
-    <p className="mt-2 text-[0.875rem] text-ink-muted">
-      {parents.map((parent) => `${parent.relation} ${parent.name}`).join(" ")}
-    </p>
+    <div className="min-w-0">
+      <p className="caption text-ink-muted">{label}</p>
+      <p className="mt-2 font-serif text-[1.35rem]">{name}</p>
+      {line ? <p className="mt-2 text-[0.8125rem] leading-[1.5] text-ink-muted">{line}</p> : null}
+    </div>
   );
 }
 
@@ -27,15 +34,11 @@ export function Family() {
           두 사람
         </h2>
         <div className="contact-card grid grid-cols-2 text-center">
-          <div className="min-w-0 pr-3">
-            <p className="caption text-ink-muted">신랑</p>
-            <p className="mt-2 font-serif text-[1.35rem]">{groom.name}</p>
-            <ParentLine parents={groom.parents} />
+          <div className="pr-3">
+            <FamilyColumn label="신랑" name={groom.name} parents={groom.parents} childWord="아들" />
           </div>
-          <div className="min-w-0 border-l border-line pl-3">
-            <p className="caption text-ink-muted">신부</p>
-            <p className="mt-2 font-serif text-[1.35rem]">{bride.name}</p>
-            <ParentLine parents={bride.parents} />
+          <div className="border-l border-line pl-3">
+            <FamilyColumn label="신부" name={bride.name} parents={bride.parents} childWord="딸" />
           </div>
         </div>
       </Reveal>

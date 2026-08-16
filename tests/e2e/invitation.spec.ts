@@ -8,6 +8,8 @@ test.describe("mobile wedding invitation", () => {
     await page.goto("/");
     await expect(page.locator("h1.hero-title")).toBeVisible();
     await expect(page.getByRole("heading", { name: "두 사람" })).toBeVisible();
+    await expect(page.getByText("이준명 · 최란옥의 아들")).toBeVisible();
+    await expect(page.getByText("김재동의 딸")).toBeVisible();
     const calendarTitle = page.locator("#calendar-title");
     await calendarTitle.scrollIntoViewIfNeeded();
     await expect(calendarTitle).toBeVisible();
@@ -19,6 +21,8 @@ test.describe("mobile wedding invitation", () => {
 
   test("shows the gift page account row without inventing numbers", async ({ page }) => {
     await page.goto("/gift");
+    await expect(page.getByText("이준명 · 최란옥의 아들")).toBeVisible();
+    await expect(page.getByText("김재동의 딸")).toBeVisible();
     const gift = page.getByRole("heading", { name: "마음을 전하실 곳" });
     await gift.scrollIntoViewIfNeeded();
     await expect(gift).toBeVisible();

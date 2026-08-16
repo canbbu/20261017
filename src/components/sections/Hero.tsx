@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { wedding } from "@/content/wedding";
 import { formatHeroDateLine } from "@/lib/calendar";
-import { coupleNames } from "@/lib/content";
+import { heroCoupleNames } from "@/lib/content";
 import { HeroPhotoMotion, HeroTextMotion } from "@/components/interactive/HeroEntrance";
 import { SafeImage } from "@/components/interactive/SafeImage";
 
@@ -14,6 +14,7 @@ export function Hero() {
       aria-label="청첩장 첫 화면"
       style={
         {
+          aspectRatio: `${wedding.hero.width} / ${wedding.hero.height}`,
           "--hero-pos": wedding.hero.objectPositionMobile,
           "--hero-pos-desktop": wedding.hero.objectPositionDesktop,
         } as CSSProperties
@@ -30,9 +31,9 @@ export function Hero() {
           className="hero-photo"
         />
       </HeroPhotoMotion>
-      <div className="hero-shade pointer-events-none absolute inset-x-0 top-0 h-[28%]" />
-      <div className="absolute inset-x-0 top-0 px-5 pt-[max(40px,env(safe-area-inset-top))] text-center text-canvas">
-        <HeroTextMotion title={wedding.copy.heroTitle} names={coupleNames()} date={dateLine} />
+      <div className="hero-shade pointer-events-none absolute inset-x-0 top-0 h-[40%]" />
+      <div className="absolute inset-x-0 top-0 px-5 pt-[max(52px,env(safe-area-inset-top))] text-center">
+        <HeroTextMotion title={wedding.copy.heroTitle} names={heroCoupleNames()} date={dateLine} />
       </div>
     </section>
   );

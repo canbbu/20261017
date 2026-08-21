@@ -1,7 +1,7 @@
 # QA Report
 
-검수 일시: 2026-08-16  
-Git commit: 없음. 이 폴더는 아직 git 저장소가 아니다.  
+검수 일시: 2026-08-21  
+Git commit: 로컬 작업 트리 (배경음악 자동재생 + 수동 토글)  
 테스트 환경: Windows 10, Node.js, Next.js 15.5.23, Playwright Chromium (Pixel 7 프로필), 로컬 `next start` 포트 3101
 
 ## 명령별 결과
@@ -10,13 +10,13 @@ Git commit: 없음. 이 폴더는 아직 git 저장소가 아니다.
 |---|---|
 | `npm run lint` (`next lint`) | 성공. 경고 없음 |
 | `npm run typecheck` | 성공 |
-| `npm run test` (Vitest 18) | 성공 |
-| `npm run build` | 성공. `/` 124 B, First Load JS 161 kB |
-| `npx playwright test` | 성공. 10 / 10 |
+| `npm run test` (Vitest 45) | 성공. `bgm-player` 6건 포함 |
+| `npm run build` | 성공. `/` 123 B, First Load JS 165 kB |
+| `npx playwright test` | 성공. 11 / 11 |
 
 ## Viewport별 screenshot 경로
 
-사람이 확인한 Hero 크롭 결과: 360, 390, 430에서 두 사람 전신이 보이며, 제목/이름/날짜가 사진 위 잔디 영역에 겹친다. 프레임은 `hero_2.jpg` 원본 비율(1171/1343)이라 좌우를 거의 자르지 않고, 첫 화면 아래에 초대 글이 보인다.
+사람이 확인한 Hero 크롭 결과: 360, 390, 430에서 두 사람 전신이 보이며, 제목/이름/날짜가 사진 위 잔디 영역에 겹친다. 프레임은 `hero_2.jpg` 원본 비율(1171/1343)이라 좌우를 거의 자르지 않고, 첫 화면 아래에 초대 글이 보인다. 좌하단 44px 배경음악 버튼이 Hero 사진 위에 떠 있으며, Playwright 캡처 시점에는 자동재생이 막혀 SpeakerSlash(꺼짐)로 보인다.
 
 - `docs/screenshots/hero-360x800.png`
 - `docs/screenshots/hero-390x844.png`
@@ -75,8 +75,9 @@ Hero는 `hero_2.jpg`(1171×1343)를 쓴다. 더 긴 3:4 원본 `hero.jpg`와 `DS
 - [x] 복사 성공/실패 토스트와 실패 시 선택 가능한 텍스트.
 - [x] Web Share 미지원 시 URL 복사.
 - [x] 지도 링크는 https만 렌더링. 현재 URL이 없어 버튼을 숨긴다.
-- [x] RSVP `enabled: false`라 섹션과 가짜 성공이 없다.
-- [x] 복사 실패, 빈 연락처, 빈 지도, 빈 갤러리 대비 상태를 구현했다.
+- [x] RSVP 섹션은 켜져 있고, 서버 응답 전에는 성공 문구를 보여 주지 않는다. Supabase 키가 없으면 연결 전 안내만 보인다.
+- [x] 복사 실패, 빈 연락처, 빈 지도, 빈 갤러리, RSVP 검증 실패 대비 상태를 구현했다.
+- [x] 배경음악은 자동재생을 시도하고, 브라우저가 막으면 좌하단 버튼 또는 첫 탭으로 재생한다. 손님이 끈 뒤에는 아무 탭으로 다시 켜지지 않는다.
 
 ### 접근성
 
@@ -110,8 +111,8 @@ Hero는 `hero_2.jpg`(1171×1343)를 쓴다. 더 긴 3:4 원본 `hero.jpg`와 `DS
 
 ## 미통과 항목과 이유
 
-1. 실기기 터치 검수 없음. Playwright Pixel 7만 통과.
-2. 시뮬 4G Lighthouse Performance 56 / LCP 13.2s. 로컬 이미지 최적화와 랩 스로틀 때문이며, 배포 도메인에서 다시 재야 한다.
+1. 실기기 터치 검수 없음. Playwright Pixel 7만 통과. iOS/카카오톡에서 소리 있는 자동재생은 정책상 거의 막히며, 첫 탭 또는 좌하단 버튼으로 재생되는지는 실기기 확인이 필요하다.
+2. 시뮬 4G Lighthouse Performance 56 / LCP 13.2s. 로컬 이미지 최적화와 랩 스로틀 때문이며, 배포 도메인에서 다시 재야 한다. BGM은 `preload="auto"`라 2.52MB가 추가로 내려갈 수 있다.
 3. INP 미측정.
 4. 200% 확대는 코드 단위로만 대응했고 실기기 확인은 없다.
 5. `DSCF0055_retouch_3000x4000.png` 파일은 디스크에 없었다. 같은 구도의 3000x4000 `아카이브/A cut clear/DSCF0055.jpg`를 복사해 사용했다. 원본은 삭제하지 않았다.
@@ -127,6 +128,7 @@ Hero는 `hero_2.jpg`(1171×1343)를 쓴다. 더 긴 3:4 원본 `hero.jpg`와 `DS
 - 지하철, 버스, 자가용, 주차 안내
 - 신랑/신부/혼주 전화번호
 - 혼주 성함과 관계
-- RSVP를 쓸 경우 `rsvp.enabled`와 외부 폼 URL
+- RSVP를 쓰려면 `.env`의 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`와 `supabase/rsvps.sql`
 - 계좌를 공개할 경우 `accounts.enabled`와 계좌 항목
 - 갤러리 05, 07, 11, 12번 alt를 더 구체적으로 다듬을 수 있다
+- 배경음악 파일은 `/music/something-stupid.mp3`. 끄려면 `wedding.music.enabled`를 false로 둔다

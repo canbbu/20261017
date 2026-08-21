@@ -31,15 +31,36 @@ describe("wedding content contract", () => {
     expect(toTelHref("")).toBeNull();
   });
 
-  it("keeps RSVP and accounts disabled until real data exists", () => {
-    expect(wedding.rsvp.enabled).toBe(false);
-    expect(wedding.accounts.enabled).toBe(false);
-    expect(wedding.accounts.items).toHaveLength(0);
+  it("enables RSVP and stores groom-side account numbers from content", () => {
+    expect(wedding.rsvp.enabled).toBe(true);
+    expect(wedding.accounts.enabled).toBe(true);
+    expect(wedding.accounts.items).toEqual([
+      {
+        side: "groom",
+        holder: "이준명",
+        bank: "농협",
+        number: "483034-52-014970",
+        relation: "부",
+      },
+      {
+        side: "groom",
+        holder: "최란옥",
+        bank: "농협",
+        number: "483034-56-218232",
+        relation: "모",
+      },
+    ]);
   });
 
   it("points images at /images/", () => {
     expect(wedding.hero.src.startsWith("/images/")).toBe(true);
+    expect(wedding.event.photo.src.startsWith("/images/")).toBe(true);
     expect(wedding.gallery.every((image) => image.src.startsWith("/images/"))).toBe(true);
+  });
+
+  it("points background music at /music/", () => {
+    expect(wedding.music.enabled).toBe(true);
+    expect(wedding.music.src).toBe("/music/something-stupid.mp3");
   });
 
   it("keeps footer names short and hero names labeled", () => {

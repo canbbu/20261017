@@ -1,5 +1,5 @@
 import { InvitationPage } from "@/components/sections/InvitationPage";
 
-export default function GiftPage() {
+export default async function GiftPage() {
   return <InvitationPage showAccounts />;
 }

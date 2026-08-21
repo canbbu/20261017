@@ -89,6 +89,31 @@ body {
   );
 }
 
+.photo-preserve {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.place-backdrop-wash {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--canvas) 38%, transparent);
+}
+
+.place-over section,
+.place-over footer {
+  background: transparent;
+}
+
+.place-over .info-card,
+.place-over .calendar-card,
+.place-over .contact-card,
+.place-over .action-card {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+
 .font-serif {
   font-family: "Noto Serif KR", Batang, serif;
 }
@@ -216,6 +241,121 @@ body {
 
 .control:active {
   transform: scale(0.98);
+}
+
+.rsvp-form {
+  display: grid;
+  width: 100%;
+  max-width: 30rem;
+  margin-inline: auto;
+  gap: 20px;
+  text-align: left;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-input {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  padding: 10px 12px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.field-textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.field-error {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.choice-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.choice,
+.consent {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.choice {
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+}
+
+.choice:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, white);
+}
+
+.choice input,
+.consent input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.public-notes {
+  width: 100%;
+  max-width: 30rem;
+  margin: 48px auto 0;
+  text-align: left;
+}
+
+.public-notes-title {
+  margin: 0 0 20px;
+  text-align: center;
+  font-family: "Noto Serif KR", Batang, serif;
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.public-notes-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.public-note {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.public-note-text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.public-note-name {
+  margin: 8px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .media {

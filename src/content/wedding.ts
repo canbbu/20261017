@@ -45,16 +45,22 @@ export const wedding = {
 
   event: {
     // 시각은 아직 확인되지 않아 기존 기본값 13:00을 유지합니다.
-    startsAt: "2026-10-17T13:00:00+09:00",
+    startsAt: "2026-10-17T12:00:00+09:00",
     timezone: "Asia/Seoul",
     venueName: "셀레네하우스웨딩",
     hall: "천안점",
     address: "충남 천안시 동남구 배울1길 35",
     phone: "041-555-1357",
+    photo: {
+      src: "/images/venue.jpg" as const,
+      alt: "셀레네하우스웨딩 천안점 예식홀. 유리창 앞 꽃 아치와 라탄 조명이 보인다",
+      width: 1600,
+      height: 1067,
+    },
     mapLinks: {
       google: "https://maps.app.goo.gl/cw1Yimj92K8ENiYC9",
       naver: "https://map.naver.com/p/search/%EC%B6%A9%EB%82%A8%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EB%B0%B0%EC%9A%B81%EA%B8%B8%2035",
-      kakao: "https://map.kakao.com/link/search/충남 천안시 동남구 배울1길 35",
+      kakao: "https://place.map.kakao.com/1183907231",
       tmap: "",
     },
     transportation: {
@@ -68,7 +74,15 @@ export const wedding = {
   copy: {
     heroTitle: "우리, 결혼합니다",
     invitation:
-      "서로를 바라보던 평범한 날들이 모여\n이제 같은 방향으로 걸어가려 합니다.\n저희의 새로운 시작을 함께해 주세요.",
+      "멀리 떨어져 있던 시간 끝에\n이제 같은 곳에서 같은 계절을 살아가려 합니다.",
+    musicPlay: "배경음악 재생",
+    musicPause: "배경음악 끄기",
+  },
+
+  music: {
+    enabled: true,
+    src: "/music/something-stupid.mp3" as const,
+    title: "Something Stupid",
   },
 
   hero: {
@@ -250,13 +264,28 @@ export const wedding = {
   ] as GalleryImage[],
 
   rsvp: {
-    enabled: false,
+    enabled: true,
     externalFormUrl: "",
   },
 
   accounts: {
-    enabled: false,
-    items: [] as Account[],
+    enabled: true,
+    items: [
+      {
+        side: "groom",
+        holder: "이준명",
+        bank: "농협",
+        number: "483034-52-014970",
+        relation: "부",
+      },
+      {
+        side: "groom",
+        holder: "최란옥",
+        bank: "농협",
+        number: "483034-56-218232",
+        relation: "모",
+      },
+    ] satisfies Account[],
   },
 
   privacy: {

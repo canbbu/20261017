@@ -2,6 +2,13 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
+const easeOut = [0.16, 1, 0.3, 1] as const;
+const photoScale = 1.03;
+const photoDuration = 1.6;
+const textDelay = 0.4;
+const textStagger = 0.24;
+const textDuration = 0.8;
+
 export function HeroPhotoMotion({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
 
@@ -11,10 +18,10 @@ export function HeroPhotoMotion({ children }: { children: React.ReactNode }) {
 
   return (
     <motion.div
-      className="absolute inset-0"
-      initial={{ scale: 1.02 }}
+      className="absolute inset-0 origin-center"
+      initial={{ scale: photoScale }}
       animate={{ scale: 1 }}
-      transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: photoDuration, ease: easeOut }}
     >
       {children}
     </motion.div>
@@ -25,27 +32,18 @@ const container = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.16,
+      delayChildren: textDelay,
+      staggerChildren: textStagger,
     },
   },
 };
 
-const titleReveal = {
-  hidden: { y: "110%", opacity: 0 },
-  visible: {
-    y: "0%",
-    opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const detail = {
-  hidden: { y: 10, opacity: 0 },
+const textReveal = {
+  hidden: { y: 8, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: textDuration, ease: easeOut },
   },
 };
 
@@ -71,23 +69,14 @@ export function HeroTextMotion({
   }
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      aria-label={`${title}. ${names}. ${date}`}
-    >
-      <h1 className="hero-title" aria-hidden="true">
-        <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-          <motion.span className="inline-block" variants={titleReveal}>
-            {title}
-          </motion.span>
-        </span>
-      </h1>
-      <motion.p className="hero-names" variants={detail}>
+    <motion.div variants={container} initial="hidden" animate="visible">
+      <motion.h1 className="hero-title" variants={textReveal}>
+        {title}
+      </motion.h1>
+      <motion.p className="hero-names" variants={textReveal}>
         {names}
       </motion.p>
-      <motion.p className="hero-date" variants={detail}>
+      <motion.p className="hero-date" variants={textReveal}>
         {date}
       </motion.p>
     </motion.div>

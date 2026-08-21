@@ -31,9 +31,11 @@ export function getSafeMapLinks(links: {
     .filter((link) => isHttpsUrl(link.href));
 }
 
-export function getDirectionsHref(address: string): string | null {
-  if (!address.trim()) {
-    return null;
-  }
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address.trim())}`;
+export function getAppMapLinks(links: {
+  google?: string;
+  naver: string;
+  kakao: string;
+  tmap: string;
+}): MapLink[] {
+  return getSafeMapLinks(links).filter((link) => link.id !== "google");
 }

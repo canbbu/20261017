@@ -47,6 +47,10 @@ export function validateWeddingContent() {
     issues.push({ field: "hero.src", message: "이미지 경로는 /images/ 하위여야 합니다." });
   }
 
+  if (wedding.event.photo && !wedding.event.photo.src.startsWith("/images/")) {
+    issues.push({ field: "event.photo.src", message: "이미지 경로는 /images/ 하위여야 합니다." });
+  }
+
   wedding.gallery.forEach((image, index) => {
     if (!image.src.startsWith("/images/")) {
       issues.push({
@@ -55,6 +59,10 @@ export function validateWeddingContent() {
       });
     }
   });
+
+  if (wedding.music.enabled && !wedding.music.src.startsWith("/music/")) {
+    issues.push({ field: "music.src", message: "배경음악 경로는 /music/ 하위여야 합니다." });
+  }
 
   return {
     ok: issues.length === 0,

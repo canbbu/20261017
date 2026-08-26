@@ -1,11 +1,34 @@
 import { describe, expect, it } from "vitest";
-import { parseRsvpFormData, readRsvpActionState, mergeOwnNote, rsvpInsertErrorMessage, selectPublicNotes, validateRsvpInput } from "@/lib/rsvp";
+import {
+  mergeOwnNote,
+  ownNoteFromRecord,
+  parseRsvpFormData,
+  readRsvpActionState,
+  rsvpInsertErrorMessage,
+  selectPublicNotes,
+  validateRsvpInput,
+  visibleNotesAfterSubmit,
+  type RsvpActionState,
+} from "@/lib/rsvp";
+
+function successState(overrides: Partial<RsvpActionState> = {}): RsvpActionState {
+  return {
+    status: "success",
+    message: "참석 의사를 전달했습니다.",
+    fieldErrors: {},
+    ownNote: null,
+    published: false,
+    ...overrides,
+  };
+}
 
 describe("RSVP action state", () => {
   it("does not read field names off undefined server action state", () => {
     const state = readRsvpActionState(undefined);
     expect(state.fieldErrors.name).toBeUndefined();
     expect(state.status).toBe("idle");
+    expect(state.ownNote).toBeNull();
+    expect(state.published).toBe(false);
   });
 });
 
@@ -178,6 +201,60 @@ describe("공개 축하글", () => {
     expect(mergeOwnNote([{ name: "김가", message: "축하해요" }], null)).toEqual([
       { name: "김가", message: "축하해요" },
     ]);
+  });
+
+  it("keeps a private 축하글 off the public list after submit", () => {
+    expect(
+      visibleNotesAfterSubmit(
+        [{ name: "김가", message: "축하해요" }],
+        successState({
+          ownNote: { name: "이가", message: "비밀 글" },
+          published: false,
+        }),
+      ),
+    ).toEqual([{ name: "김가", message: "축하해요" }]);
+  });
+
+  it("puts a published 축하글 first after submit", () => {
+    expect(
+      visibleNotesAfterSubmit(
+        [{ name: "김가", message: "축하해요" }],
+        successState({
+          ownNote: { name: "이가", message: "못 가서 아쉬워요" },
+          published: true,
+        }),
+      ),
+    ).toEqual([
+      { name: "이가", message: "못 가서 아쉬워요" },
+      { name: "김가", message: "축하해요" },
+    ]);
+  });
+
+  it("returns the written 축하글 from a saved record", () => {
+    expect(
+      ownNoteFromRecord({
+        name: "김하객",
+        attending: false,
+        guest_count: 0,
+        meal: null,
+        message: "축하해요",
+        published: false,
+        hidden: false,
+        consent: true,
+      }),
+    ).toEqual({ name: "김하객", message: "축하해요" });
+    expect(
+      ownNoteFromRecord({
+        name: "김하객",
+        attending: false,
+        guest_count: 0,
+        meal: null,
+        message: null,
+        published: false,
+        hidden: false,
+        consent: true,
+      }),
+    ).toBeNull();
   });
 
   it("explains a missing rsvps schema instead of asking the guest to retry", () => {

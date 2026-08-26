@@ -4,8 +4,6 @@ node_modules
 out
 dist
 coverage
-playwright-report
-test-results
 *.log
 .DS_Store
 .env
@@ -14,3 +12,4 @@ test-results
 docs/lighthouse-mobile.json
 docs/lighthouse-unthrottled.json
 originals
+public/fonts/prototype

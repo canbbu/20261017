@@ -52,10 +52,24 @@ describe("wedding content contract", () => {
     ]);
   });
 
+  it("points the hero at the 3:4 photograph and keeps headline copy in content", () => {
+    expect(wedding.hero.src).toBe("/images/hero_4.jpg");
+    expect(wedding.hero.width / wedding.hero.height).toBe(3 / 4);
+    expect(wedding.heroScript.src).toBe("/images/hero_1.png");
+    expect(wedding.copy.heroHeadline).toEqual(["We're getting", "married"]);
+  });
+
   it("points images at /images/", () => {
     expect(wedding.hero.src.startsWith("/images/")).toBe(true);
     expect(wedding.event.photo.src.startsWith("/images/")).toBe(true);
     expect(wedding.gallery.every((image) => image.src.startsWith("/images/"))).toBe(true);
+    expect(wedding.couple.groom.kakaoQr?.src).toBe("/images/qr/youngjik_qr.jpg");
+    expect(wedding.couple.bride.kakaoQr?.src).toBe("/images/qr/jisoo_qr.jpg");
+  });
+
+  it("points childhood portraits at /youth/", () => {
+    expect(wedding.couple.groom.youthPhoto?.src).toBe("/youth/youngjik_youth.jpg");
+    expect(wedding.couple.bride.youthPhoto?.src).toBe("/youth/jisoo_youth.jpg");
   });
 
   it("points background music at /music/", () => {

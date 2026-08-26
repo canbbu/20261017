@@ -64,6 +64,22 @@ export function validateWeddingContent() {
     issues.push({ field: "music.src", message: "배경음악 경로는 /music/ 하위여야 합니다." });
   }
 
+  const kakaoQrs = [wedding.couple.groom.kakaoQr, wedding.couple.bride.kakaoQr];
+  kakaoQrs.forEach((qr, index) => {
+    if (!qr) return;
+    if (!qr.src.startsWith("/images/")) {
+      issues.push({ field: `kakaoQr[${index}].src`, message: "이미지 경로는 /images/ 하위여야 합니다." });
+    }
+  });
+
+  const youthPhotos = [wedding.couple.groom.youthPhoto, wedding.couple.bride.youthPhoto];
+  youthPhotos.forEach((photo, index) => {
+    if (!photo) return;
+    if (!photo.src.startsWith("/youth/")) {
+      issues.push({ field: `youthPhoto[${index}].src`, message: "어릴 적 사진 경로는 /youth/ 하위여야 합니다." });
+    }
+  });
+
   return {
     ok: issues.length === 0,
     issues,

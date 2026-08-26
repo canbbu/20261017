@@ -1,84 +1,38 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
-
-const easeOut = [0.16, 1, 0.3, 1] as const;
-const photoScale = 1.03;
-const photoDuration = 1.6;
-const textDelay = 0.4;
-const textStagger = 0.24;
-const textDuration = 0.8;
-
 export function HeroPhotoMotion({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className="absolute inset-0">{children}</div>;
-  }
-
-  return (
-    <motion.div
-      className="absolute inset-0 origin-center"
-      initial={{ scale: photoScale }}
-      animate={{ scale: 1 }}
-      transition={{ duration: photoDuration, ease: easeOut }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="hero__media">{children}</div>;
 }
 
-const container = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: textDelay,
-      staggerChildren: textStagger,
-    },
-  },
-};
-
-const textReveal = {
-  hidden: { y: 8, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: textDuration, ease: easeOut },
-  },
-};
-
 export function HeroTextMotion({
-  title,
-  names,
+  headline,
+  groomName,
+  brideName,
   date,
+  dateTime,
+  scriptClassName = "",
+  dateClassName = "",
 }: {
-  title: string;
-  names: string;
+  headline: readonly [string, string];
+  groomName: string;
+  brideName: string;
   date: string;
+  dateTime: string;
+  scriptClassName?: string;
+  dateClassName?: string;
 }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return (
-      <>
-        <h1 className="hero-title">{title}</h1>
-        <p className="hero-names">{names}</p>
-        <p className="hero-date">{date}</p>
-      </>
-    );
-  }
+  const [firstLine, secondLine] = headline;
 
   return (
-    <motion.div variants={container} initial="hidden" animate="visible">
-      <motion.h1 className="hero-title" variants={textReveal}>
-        {title}
-      </motion.h1>
-      <motion.p className="hero-names" variants={textReveal}>
-        {names}
-      </motion.p>
-      <motion.p className="hero-date" variants={textReveal}>
+    <div className="hero__copy">
+      <h1 className={["hero__headline", scriptClassName].filter(Boolean).join(" ")}>
+        <span>{firstLine}</span>
+        <span>{secondLine}</span>
+      </h1>
+      <p className="hero__names">
+        {groomName} <span className="hero__names-dot">·</span> {brideName}
+      </p>
+      <time className={["hero__date", dateClassName].filter(Boolean).join(" ")} dateTime={dateTime}>
         {date}
-      </motion.p>
-    </motion.div>
+      </time>
+    </div>
   );
 }

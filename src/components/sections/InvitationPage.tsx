@@ -35,7 +35,7 @@ export async function InvitationPage({ showAccounts = false }: { showAccounts?: 
         <Gallery />
         <Contact />
         <Rsvp notes={notes} />
-        {showAccounts || wedding.accounts.enabled ? <Accounts /> : null}
+        {showAccounts && wedding.accounts.enabled ? <Accounts /> : null}
         <ShareFooter />
       </PlaceBackdrop>
     </main>

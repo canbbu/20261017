@@ -151,7 +151,6 @@ npm run lint
 npm run typecheck
 npm run test
 npm run build
-npx playwright test
 ```
 
 마지막 응답에는 변경 파일, 실행 방법, 실제 테스트 결과, 사용자가 반드시 교체해야 하는 placeholder 데이터를 짧게 정리한다.

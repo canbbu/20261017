@@ -1,3 +1,4 @@
+import { Heart } from "@phosphor-icons/react/dist/ssr";
 import { wedding } from "@/content/wedding";
 import { hasPhone } from "@/lib/content";
 import { Accordion } from "@/components/interactive/Accordion";
@@ -10,6 +11,7 @@ export function Contact() {
     ...groom.parents.map((parent) => ({ ...parent, side: "신랑측" })),
     ...bride.parents.map((parent) => ({ ...parent, side: "신부측" })),
   ].filter((parent) => hasPhone(parent.phone));
+  const showHeart = Boolean(groom.youthPhoto && bride.youthPhoto);
 
   return (
     <section className="section bg-canvas" aria-labelledby="contact-title">
@@ -17,12 +19,33 @@ export function Contact() {
         <h2 id="contact-title" className="sr-only">
           연락하기
         </h2>
-        <div className="contact-card grid grid-cols-2">
-          <div className="min-w-0 pr-3">
-            <ContactActions name={groom.name} phone={groom.phone} />
+        <div
+          className={
+            showHeart
+              ? "contact-card grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]"
+              : "contact-card grid grid-cols-2"
+          }
+        >
+          <div className={showHeart ? "min-w-0" : "min-w-0 pr-3"}>
+            <ContactActions
+              name={groom.name}
+              phone={groom.phone}
+              kakaoQr={groom.kakaoQr}
+              photo={groom.youthPhoto}
+            />
           </div>
-          <div className="min-w-0 border-l border-line pl-3">
-            <ContactActions name={bride.name} phone={bride.phone} />
+          {showHeart ? (
+            <span className="contact-heart" aria-hidden="true">
+              <Heart size={18} weight="fill" />
+            </span>
+          ) : null}
+          <div className={showHeart ? "min-w-0" : "min-w-0 border-l border-line pl-3"}>
+            <ContactActions
+              name={bride.name}
+              phone={bride.phone}
+              kakaoQr={bride.kakaoQr}
+              photo={bride.youthPhoto}
+            />
           </div>
         </div>
         {parentContacts.length > 0 ? (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ToastProvider } from "@/components/interactive/ToastRegion";
+import { heroFontClassName } from "@/lib/hero-fonts";
 import { buildMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={pretendard.variable}>
+    <html lang="ko" className={`${pretendard.variable} ${heroFontClassName}`}>
       <body className={pretendard.className}>
         <ToastProvider>{children}</ToastProvider>
       </body>

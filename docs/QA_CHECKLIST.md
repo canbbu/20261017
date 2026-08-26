@@ -65,7 +65,6 @@ Cursor는 모든 `[필수]` 항목을 통과하기 전 완료라고 말하지 �
 - [ ] [필수] TypeScript typecheck 성공
 - [ ] [필수] unit/component test 성공
 - [ ] [필수] production build 성공
-- [ ] [필수] Playwright mobile E2E 성공
 - [ ] [필수] 360, 390, 430px screenshots를 저장하고 사람이 확인했다.
 - [ ] [필수] Chrome 또는 Safari 계열 모바일 환경에서 터치 기능을 확인했다.
 

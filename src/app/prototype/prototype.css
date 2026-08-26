@@ -1,0 +1,133 @@
+@font-face {
+  font-family: "Brittany Signature";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Brittany Signature"),
+    local("BrittanySignature"),
+    url("https://fonts.cdnfonts.com/s/39082/BrittanySignature-LjyZ.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Amsterdam Four";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Amsterdam Four"),
+    local("AmsterdamFour"),
+    local("Amsterdam"),
+    url("https://db.onlinewebfonts.com/t/07cb29fdcb073fff840edc6de2067b50.woff2") format("woff2"),
+    url("https://fonts.cdnfonts.com/s/17992/Amsterdam.woff") format("woff");
+}
+
+.script-preview {
+  min-height: 100dvh;
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.hero__headline.hero__headline--allura {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+}
+
+.hero__headline.hero__headline--italianno {
+  font-family: "Italianno", cursive;
+  font-weight: 400;
+}
+
+.hero__headline.hero__headline--brittany {
+  font-family: "Brittany Signature", cursive;
+  font-weight: 400;
+}
+
+.hero__headline.hero__headline--amsterdam {
+  font-family: "Amsterdam Four", cursive;
+  font-weight: 400;
+}
+
+.script-preview__panel {
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 20px 20px 32px;
+}
+
+.prototype-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.prototype-switch a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.prototype-switch a[aria-current="page"] {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 14%, white);
+  color: var(--accent-strong);
+}
+
+.script-preview__label {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.script-preview__note {
+  margin: 6px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.script-preview-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.script-preview-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+}
+
+.script-preview-nav__item[aria-current="page"] {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 14%, white);
+  color: var(--accent-strong);
+}
+
+.script-preview__hint {
+  margin: 16px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}

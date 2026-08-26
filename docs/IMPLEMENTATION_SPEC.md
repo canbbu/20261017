@@ -133,7 +133,6 @@ public/
     gallery/
 tests/
   unit/
-  e2e/
 ```
 
 `page.tsx`는 Server Component다. `GalleryLightbox`, `CopyButton`, `ShareButton`, `Accordion`만 Client Component로 시작한다. Client Component 경계를 상위 섹션 전체로 확장하지 않는다.

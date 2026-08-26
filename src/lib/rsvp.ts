@@ -1,17 +1,24 @@
 export type RsvpField = "name" | "attending" | "guestCount" | "meal" | "message" | "consent";
 
+export type PublicNote = {
+  name: string;
+  message: string;
+};
+
 export type RsvpActionState = {
   status: "idle" | "success" | "error";
   message: string;
   fieldErrors: Partial<Record<RsvpField, string>>;
-  publishedNote: PublicNote | null;
+  ownNote: PublicNote | null;
+  published: boolean;
 };
 
 export const initialRsvpState: RsvpActionState = {
   status: "idle",
   message: "",
   fieldErrors: {},
-  publishedNote: null,
+  ownNote: null,
+  published: false,
 };
 
 export function readRsvpActionState(state: RsvpActionState | null | undefined): RsvpActionState {
@@ -19,7 +26,8 @@ export function readRsvpActionState(state: RsvpActionState | null | undefined): 
     status: state?.status ?? "idle",
     message: state?.message ?? "",
     fieldErrors: state?.fieldErrors ?? {},
-    publishedNote: state?.publishedNote ?? null,
+    ownNote: state?.ownNote ?? null,
+    published: Boolean(state?.published),
   };
 }
 
@@ -121,11 +129,6 @@ export function validateRsvpInput(input: RsvpParsedInput): RsvpValidation {
   };
 }
 
-export type PublicNote = {
-  name: string;
-  message: string;
-};
-
 export type PublicNoteSource = {
   name: string;
   message: string | null;
@@ -156,6 +159,25 @@ export function mergeOwnNote(
   }
 
   return [own, ...notes.filter((note) => note.name !== own.name || note.message !== own.message)];
+}
+
+export function visibleNotesAfterSubmit(
+  notes: readonly PublicNote[],
+  state: RsvpActionState,
+): PublicNote[] {
+  if (state.status !== "success" || !state.published) {
+    return [...notes];
+  }
+
+  return mergeOwnNote(notes, state.ownNote);
+}
+
+export function ownNoteFromRecord(record: RsvpRecord): PublicNote | null {
+  if (!record.message) {
+    return null;
+  }
+
+  return { name: record.name, message: record.message };
 }
 
 function parseChoice(value: FormDataEntryValue | null): "yes" | "no" | "" {

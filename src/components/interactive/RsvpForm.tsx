@@ -1,26 +1,27 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import { submitRsvp } from "@/app/actions/submit-rsvp";
 import { PublicNotes } from "@/components/sections/PublicNotes";
 import { useToast } from "@/components/interactive/ToastRegion";
 import {
   initialRsvpState,
-  mergeOwnNote,
   readRsvpActionState,
+  visibleNotesAfterSubmit,
   type PublicNote,
 } from "@/lib/rsvp";
 
 export function RsvpForm({ notes }: { notes: readonly PublicNote[] }) {
   const { announce } = useToast();
+  const reduceMotion = useReducedMotion();
   const thanked = useRef(false);
+  const confirmationRef = useRef<HTMLDivElement>(null);
   const [rawState, formAction, pending] = useActionState(submitRsvp, initialRsvpState);
   const state = readRsvpActionState(rawState);
   const [attending, setAttending] = useState<"yes" | "no" | "">("");
-  const shownNotes = mergeOwnNote(
-    notes,
-    state.status === "success" ? state.publishedNote : null,
-  );
+  const shownNotes = visibleNotesAfterSubmit(notes, state);
+  const showOwnNote = state.status === "success" && Boolean(state.ownNote) && !state.published;
 
   useEffect(() => {
     if (state.status !== "success" || thanked.current) {
@@ -28,14 +29,37 @@ export function RsvpForm({ notes }: { notes: readonly PublicNote[] }) {
     }
     thanked.current = true;
     announce("감사합니다.");
-  }, [state.status, announce]);
+    const node = confirmationRef.current;
+    if (node && typeof node.scrollIntoView === "function") {
+      node.scrollIntoView({
+        block: "start",
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    }
+  }, [state.status, announce, reduceMotion]);
 
   return (
     <>
       {state.status === "success" ? (
-        <p className="mx-auto max-w-[30rem] text-center text-ink-muted" role="status" aria-live="polite">
-          {state.message}
-        </p>
+        <div
+          ref={confirmationRef}
+          className="rsvp-success"
+          role="status"
+          aria-live="polite"
+        >
+          <p className="mx-auto max-w-[30rem] text-center text-ink-muted">{state.message}</p>
+          {showOwnNote && state.ownNote ? (
+            <section className="rsvp-own-note" aria-labelledby="own-note-title">
+              <h3 id="own-note-title" className="public-notes-title">
+                전달한 축하글
+              </h3>
+              <article className="public-note public-note-fresh">
+                <p className="public-note-text">{state.ownNote.message}</p>
+                <p className="public-note-name">{state.ownNote.name}</p>
+              </article>
+            </section>
+          ) : null}
+        </div>
       ) : (
         <form action={formAction} className="rsvp-form" noValidate>
           <div className="field">
@@ -188,7 +212,10 @@ export function RsvpForm({ notes }: { notes: readonly PublicNote[] }) {
           </button>
         </form>
       )}
-      <PublicNotes notes={shownNotes} />
+      <PublicNotes
+        notes={shownNotes}
+        highlightFirst={state.status === "success" && state.published}
+      />
     </>
   );
 }

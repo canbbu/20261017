@@ -1,40 +1,47 @@
-import type { CSSProperties } from "react";
 import { wedding } from "@/content/wedding";
 import { formatHeroDateLine } from "@/lib/calendar";
-import { heroCoupleNames } from "@/lib/content";
+import { allura, cormorant } from "@/lib/hero-fonts";
+import type { HeroScriptPreviewId } from "@/lib/hero-script-preview";
 import { HeroPhotoMotion, HeroTextMotion } from "@/components/interactive/HeroEntrance";
 import { SafeImage } from "@/components/interactive/SafeImage";
+import "./Hero.css";
 
-export function Hero() {
+export function Hero({
+  scriptClassName = allura.className,
+  scriptTone,
+}: {
+  scriptClassName?: string;
+  scriptTone?: HeroScriptPreviewId;
+} = {}) {
   const dateLine = formatHeroDateLine(wedding.event.startsAt, wedding.event.timezone);
+  const dateTime = wedding.event.startsAt.slice(0, 10);
 
   return (
-    <section
-      className="hero-frame relative overflow-hidden bg-canvas"
-      aria-label="청첩장 첫 화면"
-      style={
-        {
-          aspectRatio: `${wedding.hero.width} / ${wedding.hero.height}`,
-          "--hero-pos": wedding.hero.objectPositionMobile,
-          "--hero-pos-desktop": wedding.hero.objectPositionDesktop,
-        } as CSSProperties
-      }
-    >
-      <HeroPhotoMotion>
-        <SafeImage
-          src={wedding.hero.src}
-          alt={wedding.hero.alt}
-          fill
-          fallbackLabel="대표"
-          priority
-          sizes="100vw"
-          className="hero-photo"
+    <div className="hero-stage">
+      <section className="hero" aria-label="청첩장 첫 화면">
+        <HeroPhotoMotion>
+          <SafeImage
+            src={wedding.hero.src}
+            alt={wedding.hero.alt}
+            fill
+            fallbackLabel="대표"
+            priority
+            sizes="(max-width: 480px) 100vw, 480px"
+            className="hero__image"
+          />
+        </HeroPhotoMotion>
+        <HeroTextMotion
+          headline={wedding.copy.heroHeadline}
+          groomName={wedding.couple.groom.name}
+          brideName={wedding.couple.bride.name}
+          date={dateLine}
+          dateTime={dateTime}
+          scriptClassName={[scriptClassName, scriptTone ? `hero__headline--${scriptTone}` : ""]
+            .filter(Boolean)
+            .join(" ")}
+          dateClassName={cormorant.className}
         />
-      </HeroPhotoMotion>
-      <div className="hero-shade pointer-events-none absolute inset-x-0 top-0 h-[40%]" />
-      <div className="absolute inset-x-0 top-0 px-5 pt-[max(52px,env(safe-area-inset-top))] text-center">
-        <HeroTextMotion title={wedding.copy.heroTitle} names={heroCoupleNames()} date={dateLine} />
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

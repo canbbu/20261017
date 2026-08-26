@@ -29,7 +29,6 @@ export function GalleryLightbox({
   const reduce = useReducedMotion();
   const titleId = useId();
   const count = images.length;
-  const current = images[index];
 
   useEffect(() => {
     const previous = document.activeElement;
@@ -93,7 +92,7 @@ export function GalleryLightbox({
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="lightbox-shadow fixed inset-0 z-50 flex flex-col bg-[rgb(32_35_31/0.94)] text-canvas"
+      className="lightbox-shadow fixed inset-0 z-50 flex flex-col bg-[rgb(32_35_31/0.94)] pb-[max(12px,env(safe-area-inset-bottom))] text-canvas"
       initial={reduce ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
@@ -162,12 +161,6 @@ export function GalleryLightbox({
           <CaretRight size={24} weight="regular" aria-hidden="true" />
         </button>
       </div>
-
-      {current ? (
-        <p className="caption px-5 pb-[max(16px,env(safe-area-inset-bottom))] text-center text-[rgb(248_248_244/0.82)]">
-          {current.alt}
-        </p>
-      ) : null}
     </motion.div>
   );
 }

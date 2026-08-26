@@ -1,6 +1,23 @@
+export type KakaoQr = {
+  src: `/images/${string}`;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type YouthPhoto = {
+  src: `/youth/${string}`;
+  alt: string;
+  width: number;
+  height: number;
+  objectPosition: string;
+};
+
 export type Person = {
   name: string;
   phone?: string;
+  kakaoQr?: KakaoQr;
+  youthPhoto?: YouthPhoto;
   parents: Array<{
     relation: string;
     name: string;
@@ -29,6 +46,19 @@ export const wedding = {
     groom: {
       name: "이영직",
       phone: "",
+      kakaoQr: {
+        src: "/images/qr/youngjik_qr.jpg",
+        alt: "이영직 카카오톡 친구 추가 QR 코드",
+        width: 750,
+        height: 925,
+      },
+      youthPhoto: {
+        src: "/youth/youngjik_youth.jpg",
+        alt: "꽃길 옆에 서 있는 어린 이영직",
+        width: 4032,
+        height: 3024,
+        objectPosition: "center 18%",
+      },
       parents: [
         { relation: "부", name: "이준명", phone: "" },
         { relation: "모", name: "최란옥", phone: "" },
@@ -37,6 +67,19 @@ export const wedding = {
     bride: {
       name: "김지수",
       phone: "",
+      kakaoQr: {
+        src: "/images/qr/jisoo_qr.jpg",
+        alt: "김지수 카카오톡 친구 추가 QR 코드",
+        width: 750,
+        height: 925,
+      },
+      youthPhoto: {
+        src: "/youth/jisoo_youth.jpg",
+        alt: "잔디밭에 앉아 있는 어린 김지수",
+        width: 1125,
+        height: 755,
+        objectPosition: "center 28%",
+      },
       parents: [
         { relation: "부", name: "김재동", phone: "" },
       ],
@@ -72,9 +115,9 @@ export const wedding = {
   },
 
   copy: {
-    heroTitle: "우리, 결혼합니다",
+    heroHeadline: ["We're getting", "married"] as const,
     invitation:
-      "멀리 떨어져 있던 시간 끝에\n이제 같은 곳에서 같은 계절을 살아가려 합니다.",
+      "멀리 떨어져 있던 시간 끝에\n서로의 가장 가까운 사람이 되려 합니다.",
     musicPlay: "배경음악 재생",
     musicPause: "배경음악 끄기",
   },
@@ -86,13 +129,18 @@ export const wedding = {
   },
 
   hero: {
-    // mock과 같은 넓은 잔디 구도. 원본 비율 1171x1343을 프레임에 그대로 씀
-    src: "/images/hero_2.jpg" as const,
-    alt: "푸른 잔디밭에 나란히 앉아 서로를 바라보는 신랑과 신부",
-    width: 1171,
-    height: 1343,
-    objectPositionMobile: "50% 50%",
-    objectPositionDesktop: "50% 50%",
+    src: "/images/hero_4.jpg" as const,
+    alt: "베일 아래에서 가까이 서서 서로를 바라보는 신랑과 신부",
+    width: 2250,
+    height: 3000,
+    objectPositionMobile: "center center",
+    objectPositionDesktop: "center center",
+  },
+
+  heroScript: {
+    src: "/images/hero_1.png" as const,
+    width: 619,
+    height: 297,
   },
 
   gallery: [

@@ -4,7 +4,7 @@ import { Reveal } from "@/components/interactive/Reveal";
 import { formatEventDateLine } from "@/lib/calendar";
 import { coupleNames } from "@/lib/content";
 
-export function ShareFooter() {
+export function ShareFooter({ sharePath }: { sharePath: "/" | "/gift" }) {
   const names = coupleNames();
   const dateLine = formatEventDateLine(wedding.event.startsAt, wedding.event.timezone);
 
@@ -12,7 +12,7 @@ export function ShareFooter() {
     <footer className="section bg-canvas pb-[max(96px,calc(64px+env(safe-area-inset-bottom)))]">
       <Reveal className="page-shell mx-auto text-center">
         <h2 className="sr-only">공유</h2>
-        <ShareButton title={`${names}, 결혼합니다`} text={wedding.copy.invitation} />
+        <ShareButton title={`${names}, 결혼합니다`} text={wedding.copy.invitation} path={sharePath} />
         <p className="mt-10 font-serif text-[1.125rem]">{names}</p>
         <p className="mt-2 text-ink-muted">{dateLine}</p>
       </Reveal>

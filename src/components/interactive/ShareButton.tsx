@@ -4,17 +4,23 @@ import { ShareNetwork } from "@phosphor-icons/react";
 import { copyText } from "@/lib/clipboard";
 import { useToast } from "@/components/interactive/ToastRegion";
 
+export function shareUrlForPath(origin: string, path: "/" | "/gift"): string {
+  return `${origin.replace(/\/$/, "")}${path === "/" ? "/" : path}`;
+}
+
 export function ShareButton({
   title,
   text,
+  path,
 }: {
   title: string;
   text: string;
+  path: "/" | "/gift";
 }) {
   const { announce } = useToast();
 
   async function handleShare() {
-    const url = window.location.href;
+    const url = shareUrlForPath(window.location.origin, path);
 
     if (navigator.share) {
       try {

@@ -143,6 +143,13 @@ export const wedding = {
     height: 297,
   },
 
+  og: {
+    src: "/og.jpg" as const,
+    alt: "잔디밭에 앉아 파란 꽃다발을 들고 웃는 김지수와 그 옆의 이영직",
+    width: 1200,
+    height: 630,
+  },
+
   gallery: [
     {
       src: "/images/gallery/DSCF0007.jpg",

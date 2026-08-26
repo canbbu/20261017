@@ -56,6 +56,8 @@ describe("wedding content contract", () => {
     expect(wedding.hero.src).toBe("/images/hero_4.jpg");
     expect(wedding.hero.width / wedding.hero.height).toBe(3 / 4);
     expect(wedding.heroScript.src).toBe("/images/hero_1.png");
+    expect(wedding.og.src).toBe("/og.jpg");
+    expect(wedding.og.width / wedding.og.height).toBeCloseTo(1200 / 630);
     expect(wedding.copy.heroHeadline).toEqual(["We're getting", "married"]);
   });
 

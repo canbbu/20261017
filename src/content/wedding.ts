@@ -176,12 +176,6 @@ export const wedding = {
       height: 1600,
     },
     {
-      src: "/images/gallery/DSCF0091.jpg",
-      alt: "햇살 아래 눈을 감고 가까이 서 있는 두 사람",
-      width: 1200,
-      height: 1600,
-    },
-    {
       src: "/images/gallery/DSCF0096.jpg",
       alt: "나무 그늘에서 웃고 있는 신랑과 곁의 신부",
       width: 1200,
@@ -249,6 +243,12 @@ export const wedding = {
       height: 1600,
     },
     {
+      src: "/images/gallery/DSCF0341.jpg",
+      alt: "밤 석조 건물 앞에서 가까이 기대어 있는 신랑과 신부",
+      width: 1600,
+      height: 1200,
+    },
+    {
       src: "/images/gallery/DSCF0362.jpg",
       alt: "밤 건물 앞에서 마주 보는 신랑과 신부",
       width: 1200,
@@ -267,8 +267,26 @@ export const wedding = {
       height: 1600,
     },
     {
+      src: "/images/gallery/DSCF0611.jpg",
+      alt: "밤 건물 문 앞에서 카메라를 보며 웃는 신랑과 신부",
+      width: 1600,
+      height: 1200,
+    },
+    {
       src: "/images/gallery/DSCF0661.jpg",
       alt: "돌계단에 앉아 서로를 바라보는 신랑과 신부",
+      width: 1200,
+      height: 1600,
+    },
+    {
+      src: "/images/gallery/DSCF0796.jpg",
+      alt: "밤 거리에서 신랑이 신발을 들고 마주 보는 두 사람",
+      width: 1600,
+      height: 1200,
+    },
+    {
+      src: "/images/gallery/DSCF0812.jpg",
+      alt: "밤 거리에서 부케와 신발을 들고 걷는 신랑과 신부",
       width: 1200,
       height: 1600,
     },
@@ -299,9 +317,27 @@ export const wedding = {
       featured: true,
     },
     {
+      src: "/images/gallery/DSCF1913.jpg",
+      alt: "나무 그늘 잔디에 앉아 웃고 있는 신랑과 신부",
+      width: 1067,
+      height: 1600,
+    },
+    {
+      src: "/images/gallery/DSCF1964.jpg",
+      alt: "공원 돌다리 위에서 손을 잡고 걷는 두 사람",
+      width: 1067,
+      height: 1600,
+    },
+    {
       src: "/images/gallery/DSCF2019.jpg",
       alt: "공원에서 부케를 들고 앉아 있는 신부와 곁의 신랑",
       width: 1067,
+      height: 1600,
+    },
+    {
+      src: "/images/gallery/DSCF2181.jpg",
+      alt: "햇살 아래 난간에 기대어 손을 잡고 있는 신랑과 신부",
+      width: 1066,
       height: 1600,
     },
     {
@@ -309,6 +345,12 @@ export const wedding = {
       alt: "도쿄타워 앞 횡단보도를 건너며 뒤돌아보는 신부",
       width: 1600,
       height: 1067,
+    },
+    {
+      src: "/images/gallery/DSCF2250.jpg",
+      alt: "밤 석조 건물 앞에서 카메라를 보며 서 있는 두 사람",
+      width: 1067,
+      height: 1600,
     },
     {
       src: "/images/gallery/DSCF2311.jpg",

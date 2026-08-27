@@ -5,7 +5,6 @@ import { Family } from "@/components/sections/Family";
 import { Gallery } from "@/components/sections/Gallery";
 import { Hero } from "@/components/sections/Hero";
 import { Invitation } from "@/components/sections/Invitation";
-import { PlaceBackdrop } from "@/components/sections/PlaceBackdrop";
 import { Rsvp } from "@/components/sections/Rsvp";
 import { ShareFooter } from "@/components/sections/ShareFooter";
 import { Venue } from "@/components/sections/Venue";
@@ -27,17 +26,15 @@ export async function InvitationPage({ showAccounts = false }: { showAccounts?: 
         />
       ) : null}
       <Hero />
-      <PlaceBackdrop>
-        <Invitation />
-        <Family />
-        <WeddingCalendar />
-        <Venue />
-        <Gallery />
-        <Contact />
-        <Rsvp notes={notes} />
-        {showAccounts && wedding.accounts.enabled ? <Accounts /> : null}
-        <ShareFooter sharePath={showAccounts ? "/gift" : "/"} />
-      </PlaceBackdrop>
+      <Invitation />
+      <Family />
+      <WeddingCalendar />
+      <Venue />
+      <Gallery />
+      <Contact />
+      <Rsvp notes={notes} />
+      {showAccounts && wedding.accounts.enabled ? <Accounts /> : null}
+      <ShareFooter sharePath={showAccounts ? "/gift" : "/"} />
     </main>
   );
 }

@@ -23,9 +23,8 @@ export function GalleryClient({ images }: { images: readonly GalleryImage[] }) {
     <>
       <motion.ul
         className="gallery-grid"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        initial={false}
+        animate="visible"
         variants={{
           hidden: {},
           visible: { transition: { staggerChildren: reduce ? 0 : 0.07 } },
@@ -36,13 +35,13 @@ export function GalleryClient({ images }: { images: readonly GalleryImage[] }) {
           <motion.li
             key={image.src}
             variants={{
-              hidden: { opacity: 0, y: 16, scale: 0.985 },
-              visible: { opacity: 1, y: 0, scale: 1 },
+              hidden: { y: 16 },
+              visible: { y: 0 },
             }}
             initial={reduce ? false : "hidden"}
             animate="visible"
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ y: 8 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             layout
           >
             <button

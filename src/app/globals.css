@@ -73,24 +73,6 @@ body {
   object-fit: contain;
 }
 
-.place-backdrop-wash {
-  position: absolute;
-  inset: 0;
-  background: color-mix(in srgb, var(--canvas) 38%, transparent);
-}
-
-.place-over section,
-.place-over footer {
-  background: transparent;
-}
-
-.place-over .info-card,
-.place-over .calendar-card,
-.place-over .contact-card,
-.place-over .action-card {
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-}
-
 .font-serif {
   font-family: "Noto Serif KR", Batang, serif;
 }

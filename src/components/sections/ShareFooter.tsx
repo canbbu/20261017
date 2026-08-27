@@ -1,10 +1,10 @@
 import { wedding } from "@/content/wedding";
-import { ShareButton } from "@/components/interactive/ShareButton";
+import { ShareButton, type SharePath } from "@/components/interactive/ShareButton";
 import { Reveal } from "@/components/interactive/Reveal";
 import { formatEventDateLine } from "@/lib/calendar";
 import { coupleNames } from "@/lib/content";
 
-export function ShareFooter({ sharePath }: { sharePath: "/" | "/gift" }) {
+export function ShareFooter({ sharePath }: { sharePath: SharePath }) {
   const names = coupleNames();
   const dateLine = formatEventDateLine(wedding.event.startsAt, wedding.event.timezone);
 

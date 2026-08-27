@@ -1,4 +1,5 @@
 import { BgmPlayer } from "@/components/interactive/BgmPlayer";
+import type { SharePath } from "@/components/interactive/ShareButton";
 import { Accounts } from "@/components/sections/Accounts";
 import { Contact } from "@/components/sections/Contact";
 import { Family } from "@/components/sections/Family";
@@ -12,8 +13,16 @@ import { WeddingCalendar } from "@/components/sections/WeddingCalendar";
 import { wedding } from "@/content/wedding";
 import { listPublicNotes } from "@/lib/public-notes";
 
-export async function InvitationPage({ showAccounts = false }: { showAccounts?: boolean }) {
-  const notes = wedding.rsvp.enabled ? await listPublicNotes() : [];
+export async function InvitationPage({
+  showAccounts = false,
+  showRsvp = true,
+  sharePath = "/",
+}: {
+  showAccounts?: boolean;
+  showRsvp?: boolean;
+  sharePath?: SharePath;
+}) {
+  const notes = showRsvp && wedding.rsvp.enabled ? await listPublicNotes() : [];
 
   return (
     <main>
@@ -32,9 +41,9 @@ export async function InvitationPage({ showAccounts = false }: { showAccounts?: 
       <Venue />
       <Gallery />
       <Contact />
-      <Rsvp notes={notes} />
+      {showRsvp ? <Rsvp notes={notes} /> : null}
       {showAccounts && wedding.accounts.enabled ? <Accounts /> : null}
-      <ShareFooter sharePath={showAccounts ? "/gift" : "/"} />
+      <ShareFooter sharePath={sharePath} />
     </main>
   );
 }

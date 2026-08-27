@@ -37,13 +37,30 @@ describe("ShareButton", () => {
     await user.click(screen.getByRole("button", { name: "초대장 공유" }));
     expect(writeText).toHaveBeenCalledWith("https://20261017.vercel.app/gift");
   });
+
+  it("shares the mom path from the mom page", async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal("navigator", { clipboard: { writeText } });
+    vi.stubGlobal("location", { origin: "https://20261017.vercel.app" });
+    render(
+      <ToastProvider>
+        <ShareButton title="우리, 결혼합니다" text="초대장" path="/mom" />
+      </ToastProvider>,
+    );
+    await user.click(screen.getByRole("button", { name: "초대장 공유" }));
+    expect(writeText).toHaveBeenCalledWith("https://20261017.vercel.app/mom");
+  });
 });
 
 describe("shareUrlForPath", () => {
-  it("keeps home and gift as distinct public URLs", () => {
+  it("keeps home, gift, and mom as distinct public URLs", () => {
     expect(shareUrlForPath("https://20261017.vercel.app", "/")).toBe("https://20261017.vercel.app/");
     expect(shareUrlForPath("https://20261017.vercel.app/", "/gift")).toBe(
       "https://20261017.vercel.app/gift",
+    );
+    expect(shareUrlForPath("https://20261017.vercel.app/", "/mom")).toBe(
+      "https://20261017.vercel.app/mom",
     );
   });
 });

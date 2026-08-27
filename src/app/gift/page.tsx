@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default async function GiftPage() {
-  return <InvitationPage showAccounts />;
+  return <InvitationPage showAccounts sharePath="/gift" />;
 }

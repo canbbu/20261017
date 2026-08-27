@@ -4,7 +4,9 @@ import { ShareNetwork } from "@phosphor-icons/react";
 import { copyText } from "@/lib/clipboard";
 import { useToast } from "@/components/interactive/ToastRegion";
 
-export function shareUrlForPath(origin: string, path: "/" | "/gift"): string {
+export type SharePath = "/" | "/gift" | "/mom";
+
+export function shareUrlForPath(origin: string, path: SharePath): string {
   return `${origin.replace(/\/$/, "")}${path === "/" ? "/" : path}`;
 }
 
@@ -15,7 +17,7 @@ export function ShareButton({
 }: {
   title: string;
   text: string;
-  path: "/" | "/gift";
+  path: SharePath;
 }) {
   const { announce } = useToast();
 

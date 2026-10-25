@@ -351,6 +351,207 @@ body {
   box-shadow: 0 12px 40px rgb(32 35 31 / 0.28);
 }
 
+.thanks-section {
+  max-width: var(--prose-max);
+  margin: 0 auto;
+}
+
+.thanks-sentence {
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+.thanks-title {
+  font-size: clamp(1.125rem, 6vw, 2.25rem);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.thanks-title-line {
+  display: block;
+}
+
+.lottery-status {
+  margin: 32px 0 0;
+  text-align: center;
+}
+
+.countdown {
+  display: grid;
+  gap: 12px;
+  margin: 32px 0 0;
+  text-align: center;
+}
+
+.countdown-units {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 20px;
+}
+
+.countdown-units span {
+  display: grid;
+  gap: 2px;
+  min-width: 44px;
+}
+
+.countdown-units b {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 520;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.lottery-grade {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.lottery-grade-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 520;
+  line-height: 1.4;
+}
+
+.lottery-prize {
+  margin: 4px 0 8px;
+  color: var(--accent-strong);
+}
+
+.lottery-lines p {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.lottery-overlap {
+  margin: 8px 0 0;
+}
+
+.lottery-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.lottery-field {
+  display: grid;
+  gap: 6px;
+}
+
+.field {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 12px;
+}
+
+.field-single {
+  min-height: 44px;
+}
+
+.solid-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--accent-strong);
+  color: var(--canvas);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.solid-button:disabled,
+.quiet-button:disabled {
+  opacity: 0.6;
+}
+
+.lottery-error {
+  margin: 0;
+  color: var(--error);
+}
+
+.lottery-preview {
+  margin-top: 48px;
+}
+
+.ticket-check {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  word-break: keep-all;
+}
+
+.ticket-check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ticket-check-row label {
+  display: grid;
+  flex: 1 1 8rem;
+  gap: 6px;
+}
+
+.ticket-result {
+  margin: 4px 0 0;
+  padding: 22px 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-media);
+  background: var(--surface);
+  text-align: center;
+}
+
+.ticket-result-grade {
+  margin: 2px 0 0;
+  font-family: "Noto Serif KR", Batang, serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.ticket-result-prize {
+  margin: 6px 0 0;
+  color: var(--accent-strong);
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+.ticket-result-detail {
+  margin: 16px auto 0;
+  max-width: 26rem;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  line-height: 1.75;
+  text-align: left;
+}
+
+.ticket-result-detail + .ticket-result-detail {
+  margin-top: 6px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.ticket-result-invalid .ticket-result-grade {
+  color: var(--error);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { InvitationPage } from "@/components/sections/InvitationPage";
+import { ThanksPage } from "@/components/sections/ThanksPage";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: { url: "/" },
 };
 
-export default async function HomePage() {
-  return <InvitationPage />;
+export default function HomePage() {
+  return <ThanksPage />;
 }

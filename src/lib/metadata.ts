@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { wedding } from "@/content/wedding";
-import { formatEventDateLine } from "@/lib/calendar";
 import { coupleNames } from "@/lib/content";
 
 export function buildMetadata(): Metadata {
-  const title = `${coupleNames()}, 결혼합니다`;
-  const dateLine = formatEventDateLine(wedding.event.startsAt, wedding.event.timezone);
-  const description = `${dateLine}, ${wedding.event.venueName}에서 결혼합니다. 오시는 길과 인사를 이 초대장에서 확인하세요.`;
+  const title = wedding.thanks.lotteryTitle;
+  const description = `${coupleNames()}. ${wedding.thanks.sentence}`;
   const ogImage = {
     url: wedding.og.src,
     width: wedding.og.width,

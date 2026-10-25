@@ -13,3 +13,7 @@ docs/lighthouse-mobile.json
 docs/lighthouse-unthrottled.json
 originals
 public/fonts/prototype
+
+.env.local
+.env
+supabase/

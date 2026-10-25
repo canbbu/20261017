@@ -1,134 +1,94 @@
 # QA Report
 
-검수 일시: 2026-08-21  
-Git commit: 로컬 작업 트리 (배경음악 자동재생 + 수동 토글)  
-테스트 환경: Windows 10, Node.js, Next.js 15.5.23, Playwright Chromium (Pixel 7 프로필), 로컬 `next start` 포트 3101
+검수 일시: 2026-10-25
+Git commit: 커밋하지 않은 로컬 작업
+테스트 환경: Windows, Node.js, Next.js 15.5.23, 로컬 `next dev` http://localhost:3001, Cursor 브라우저
 
 ## 명령별 결과
 
 | 명령 | 결과 |
 |---|---|
-| `npm run lint` (`next lint`) | 성공. 경고 없음 |
+| `npm run lint` | 성공. 경고 없음 |
 | `npm run typecheck` | 성공 |
-| `npm run test` (Vitest 45) | 성공. `bgm-player` 6건 포함 |
-| `npm run build` | 성공. `/` 123 B, First Load JS 165 kB |
-| `npx playwright test` | 성공. 11 / 11 |
+| `npm run test` | 성공. 77건. 이후 제목 줄바꿈 확인으로 lottery, thanks-view 8건 다시 성공 |
+| `npm run build` | 성공. `/`, `/mom`, `/gift`, `/edit`는 동적 렌더 |
+| Playwright | 이 저장소에 Playwright 설정 파일이 없어 실행하지 못함 |
+| 브라우저 확인 | `/`, `/mom`, `/gift`에 감사 문구, 제목, 추첨까지 남은 시간이 보임. 초대장 내용과 `/edit` 링크는 없음. `/edit`는 비밀번호가 연결되지 않았다는 안내만 보임. 남은 시간은 초 단위로 바뀜 |
 
 ## Viewport별 screenshot 경로
 
-사람이 확인한 Hero 크롭 결과: 360, 390, 430에서 두 사람 전신이 보이며, 제목/이름/날짜가 사진 위 잔디 영역에 겹친다. 프레임은 `hero_2.jpg` 원본 비율(1171/1343)이라 좌우를 거의 자르지 않고, 첫 화면 아래에 초대 글이 보인다. 좌하단 44px 배경음악 버튼이 Hero 사진 위에 떠 있으며, Playwright 캡처 시점에는 자동재생이 막혀 SpeakerSlash(꺼짐)로 보인다.
+360, 390, 430에서 제목 `2026`와 `ハロウィーンジャンボおみくじ`가 각각 한 줄로 읽힌다. 이 화면에는 사진이 없다.
 
-- `docs/screenshots/hero-360x800.png`
-- `docs/screenshots/hero-390x844.png`
-- `docs/screenshots/hero-430x932.png`
-- `docs/screenshots/hero-320x568.png`
-- `docs/screenshots/page-360x800.png`
-- `docs/screenshots/page-390x844.png`
-- `docs/screenshots/page-430x932.png`
-- `docs/screenshots/page-320x568.png`
+- `docs/screenshots/thanks-360x800.png`
+- `docs/screenshots/thanks-390x844.png`
+- `docs/screenshots/thanks-430x932.png`
 
 ## Lighthouse 수치
 
-로컬 headless Chrome. Accessibility는 100.
-
-| 조건 | Performance | LCP | CLS | TBT / INP | 비고 |
-|---|---|---|---|---|---|
-| 모바일 화면, 스로틀 없음 | 100 | 0.2s | 0 | TBT 0ms | 로컬 `next start` |
-| 모바일 화면, 시뮬 4G | 56 | 13.2s | 0 | TBT 0ms | 랩 스로틀. CDN 배포 전 수치 |
-| INP | 미측정 | | | | navigation 감사에는 상호작용 샘플이 없음 |
-
-Hero는 `hero_2.jpg`(1171×1343)를 쓴다. 더 긴 3:4 원본 `hero.jpg`와 `DSCF0055_retouch_3000x4000.jpg`는 그대로 두었다.
+이번 검수에서 Lighthouse를 실행하지 못했다. 저장소에 Lighthouse 설정이 없고, 이전 점수는 초대장 페이지 기준이라 이 화면에 쓰지 않는다.
 
 ## 체크리스트
 
+하객 주소는 청첩장 대신 감사와 할로윈 점보만 보여 준다. 갤러리, 전화, 계좌, 지도, 참석 의사는 이 주소에 없다.
+
 ### 콘텐츠
 
-- [x] placeholder는 사용자 데이터로 교체하지 않았고, 화면과 이 보고서에 입력 전 상태로 표시했다.
-- [x] 예식일 2026-10-17 토요일, 달력 강조일도 17일이다.
-- [x] 보이는 문구를 다시 읽었다. 과장 광고 문구 없음.
+- [x] 감사 문구와 복권 제목은 `src/content/wedding.ts`에 있다.
+- [x] 추첨 시각은 2026-10-26 12:00 KST다. 화면의 남은 시간이 그 시각과 맞다.
+- [x] 보이는 문구를 다시 읽었다.
 - [x] em dash / en dash 없음.
-- [x] 이름, 날짜, 개인정보는 `src/content/wedding.ts`에서만 온다.
+- [x] 하객이 보는 문구는 `wedding.ts`에서 온다. 당첨번호는 저장값이며 코드에 적어 두지 않았다.
 
 ### 비주얼
 
-- [x] Hero에는 사진과 텍스트만 있다.
-- [x] 360 / 390 / 430에서 인물이 잘리지 않는다.
-- [x] Hero 제목 2줄 이하, 이름과 날짜가 읽힌다.
+- [x] 이 화면에는 Hero 사진이 없다. 사진 위 장식도 없다.
+- [x] 360 / 390 / 430에서 제목이 잘려 읽히지 않는 상태는 아니다. 인물 사진은 이 화면에 없다.
+- [x] 제목은 연도와 복권 이름이 각각 한 줄이다.
 - [x] canvas / surface / ink / olive accent만 사용.
 - [x] 섹션 테마가 뒤집히지 않는다.
-- [x] radius는 이미지 12px, 버튼 8px.
+- [x] 입력칸과 버튼 radius는 8px.
 - [x] 배지, 꽃 SVG, 하트, 섹션 번호, 스크롤 안내 없음.
-- [x] 동일한 카드 그리드 반복 없음.
+- [x] 카드 그리드 없음.
 
 ### 갤러리
 
-- [x] Playwright에서 스와이프/키보드 다음이 동작한다.
-- [x] Escape로 닫힌다.
-- [x] 닫은 뒤 원래 썸네일로 focus가 돌아간다.
-- [x] 현재 번호와 닫기 버튼에 접근성 이름이 있다.
-- [x] 이미지 로드 실패 시 `SafeImage`가 레이아웃을 유지한다.
-- [x] 초기 화면 아래 이미지는 `loading="lazy"`다.
+- [ ] 해당 없음. 하객 주소에서 갤러리를 빼기로 했다.
 
 ### 기능
 
-- [x] 전화/문자는 번호가 있을 때만 `tel:` / `sms:`로 연결된다. 현재는 비어 있어 버튼을 숨긴다.
-- [x] 복사 성공/실패 토스트와 실패 시 선택 가능한 텍스트.
-- [x] Web Share 미지원 시 URL 복사.
-- [x] 지도 링크는 https만 렌더링. 현재 URL이 없어 버튼을 숨긴다.
-- [x] RSVP 섹션은 켜져 있고, 서버 응답 전에는 성공 문구를 보여 주지 않는다. Supabase 키가 없으면 연결 전 안내만 보인다.
-- [x] 복사 실패, 빈 연락처, 빈 지도, 빈 갤러리, RSVP 검증 실패 대비 상태를 구현했다.
-- [x] 배경음악은 자동재생을 시도하고, 브라우저가 막으면 좌하단 버튼 또는 첫 탭으로 재생한다. 손님이 끈 뒤에는 아무 탭으로 다시 켜지지 않는다.
+- [ ] 해당 없음. 전화, 계좌, 공유, 지도, 참석 의사는 이 주소에 없다.
+- [x] 번호가 저장되기 전에는 추첨 시각 전 남은 시간, 추첨 시각 후 「준비중입니다」.
+- [x] 자릿수가 틀린 번호는 저장하지 않도록 검증한다. 단위 테스트로 확인.
+- [x] `/edit`는 비밀번호가 없으면 저장 화면을 열지 않는다. 현재 환경은 비밀번호 미연결 안내가 보인다.
 
 ### 접근성
 
-- [x] 버튼/링크 최소 44px. 320px 공유 버튼 높이 확인.
-- [x] 본문 ink on canvas는 AA를 넘는다. Lighthouse a11y 100.
-- [x] `:focus-visible` outline 유지.
-- [x] 사진 alt는 한국어 설명. 장식 이미지 없음.
-- [x] `prefers-reduced-motion`에서 Hero zoom/reveal이 꺼진다.
-- [x] 320px에서도 기능이 남는다. 200% zoom은 코드상 상대 단위이나 실기기 확대는 미확인.
-- [x] 토스트 `aria-live="polite"`.
+- [x] `/edit`의 비밀번호 입력과 버튼은 44px 이상. 지금 환경에서는 안내 문구만 보인다.
+- [x] 본문은 ink, 상금은 accent-strong, 바탕은 canvas.
+- [x] 기존 `focus-visible` outline을 유지.
+- [x] 이 화면에는 내용 이미지가 없다.
+- [x] 남은 시간 숫자는 움직이지 않고 값만 바뀐다. `Reveal`은 reduced motion에서 애니메이션을 끈다.
+- [ ] 200% 확대는 이번 브라우저 확인에서 보지 못했다.
+- [ ] 복사 토스트는 이 화면에 없다.
 
 ### 성능
 
-- [x] Hero에 width/height, `priority`, `sizes="100vw"`.
-- [x] 모든 이미지에 width/height 또는 aspect-ratio.
-- [x] transform/opacity만 애니메이션.
+- [x] 이 화면에는 Hero 이미지가 없다.
+- [x] 내용 이미지가 없다.
+- [x] layout 속성을 애니메이션하지 않는다.
 - [x] `window.addEventListener('scroll')` 없음.
-- [x] motion/lightbox/toast 타이머에 cleanup이 있다.
-- [~] Lighthouse 모바일 90 목표: 스로틀 없는 로컬은 100, 시뮬 4G는 56. 배포 후 재측정 필요.
-- [~] LCP < 2.5s: 로컬 0.2s, 시뮬 4G 13.2s. CLS 0. INP는 랩에서 미측정.
+- [x] 남은 시간 interval은 cleanup한다.
+- [ ] Lighthouse 미실행.
 
 ### 빌드와 테스트
 
-- [x] lint
-- [x] typecheck
-- [x] unit/component
-- [x] production build
-- [x] Playwright mobile E2E
-- [x] 360 / 390 / 430 스크린샷 사람 확인
-- [~] 실기기 Chrome/Safari 터치는 아직이다. Playwright Chromium 모바일에서 라이트박스 스와이프와 탭을 확인했다.
+- [x] lint 성공
+- [x] typecheck 성공
+- [x] unit test 성공
+- [x] production build 성공
+- [x] 360, 390, 430 screenshot 저장
+- [ ] Playwright 터치 시나리오는 설정 파일이 없어 실행하지 못함. 브라우저에서 하객 주소 세 곳과 `/edit`를 열었다.
 
-## 미통과 항목과 이유
+## 사용자 확인이 필요한 것
 
-1. 실기기 터치 검수 없음. Playwright Pixel 7만 통과. iOS/카카오톡에서 소리 있는 자동재생은 정책상 거의 막히며, 첫 탭 또는 좌하단 버튼으로 재생되는지는 실기기 확인이 필요하다.
-2. 시뮬 4G Lighthouse Performance 56 / LCP 13.2s. 로컬 이미지 최적화와 랩 스로틀 때문이며, 배포 도메인에서 다시 재야 한다. BGM은 `preload="auto"`라 2.52MB가 추가로 내려갈 수 있다.
-3. INP 미측정.
-4. 200% 확대는 코드 단위로만 대응했고 실기기 확인은 없다.
-5. `DSCF0055_retouch_3000x4000.png` 파일은 디스크에 없었다. 같은 구도의 3000x4000 `아카이브/A cut clear/DSCF0055.jpg`를 복사해 사용했다. 원본은 삭제하지 않았다.
-
-## 사용자 확인이 필요한 개인정보/콘텐츠
-
-`src/content/wedding.ts`만 수정하면 된다.
-
-- 신랑 이름, 신부 이름
-- 예식 일시 `startsAt` (지금은 2026-08-15T13:00:00+09:00)
-- 예식장 이름, 홀/층, 도로명 주소, 예식장 전화
-- 네이버지도 / 카카오맵 / 티맵 https 링크
-- 지하철, 버스, 자가용, 주차 안내
-- 신랑/신부/혼주 전화번호
-- 혼주 성함과 관계
-- RSVP를 쓰려면 `.env`의 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`와 `supabase/rsvps.sql`
-- 계좌를 공개할 경우 `accounts.enabled`와 계좌 항목
-- 갤러리 05, 07, 11, 12번 alt를 더 구체적으로 다듬을 수 있다
-- 배경음악 파일은 `/music/something-stupid.mp3`. 끄려면 `wedding.music.enabled`를 false로 둔다
+당첨번호를 저장하려면 이 사이트의 Supabase에 `supabase/lottery.sql`을 적용하고, 서버 환경변수 `LOTTERY_EDIT_PASSWORD`(8자 이상)와 `SUPABASE_SERVICE_ROLE_KEY`를 넣어야 한다. 지금은 `/edit`에 비밀번호 연결 안내만 나온다. 하객 주소에는 번호 입력칸이 없다.
